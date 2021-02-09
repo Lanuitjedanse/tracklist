@@ -1,22 +1,15 @@
-// registration.js
 import React from "react";
 import axios from "./Axios";
 import { Link } from "react-router-dom";
 
-export default class Registration extends React.Component {
+export default class Login extends React.Component {
     constructor() {
         super();
         this.state = {
             error: false,
             dbError: false,
         };
-        //strategy #1 for biding
-        // this.handleChange = this.handleChange.bind(this);
     }
-
-    // 1. we need to store the user's input in state
-    // 2. when the user clicks "submit" we need to take the input we got from the user
-    // and send it off to the server in a POST request
 
     handleChange(e) {
         // console.log("e.target.value", e.target.value);
@@ -32,72 +25,58 @@ export default class Registration extends React.Component {
         // 1. send a user's input off to the server in a POST
         // console.log("I handle the click");
         axios
-            .post("/registration", this.state)
+            .post("/login", this.state)
             .then((response) => {
                 console.log("response from server: ", response);
-                // need to look at the response and make sure there is no error message sent from server
-                // for example, the server might send back a msg that says
-                // "the user forgot to fill in an input field"
-                // in this case we need to render an error message for the user
+
                 if (!response.data.success) {
-                    //handle error
                     this.setState({
                         error: true,
                     });
                 } else {
-                    // if everything goes well redirect the user to "/" route
                     location.replace("/");
                 }
             })
             .catch((err) => {
-                console.log("error in axios post registration: ", err);
+                console.log("error in axios post login: ", err);
             });
-        // // how to conditionally render an error message
-        // only run this code if there is an error
     }
 
     render() {
         return (
             <div className="right-box">
                 <div className="reg-box">
-                    <h2 className="signup-title">Sign up</h2>
-
-                    <input
-                        onChange={(e) => this.handleChange(e)}
-                        name="first"
-                        type="text"
-                        placeholder="First Name"
-                        autoComplete="off"
-                    ></input>
-                    <input
-                        onChange={(e) => this.handleChange(e)}
-                        name="last"
-                        type="text"
-                        placeholder="Last Name"
-                        autoComplete="off"
-                    ></input>
+                    <h2 className="login-title">Login</h2>
                     <input
                         onChange={(e) => this.handleChange(e)}
                         name="email"
                         type="email"
                         placeholder="Email"
-                        autoComplete="off"
                     ></input>
                     <input
                         onChange={(e) => this.handleChange(e)}
                         name="password"
                         type="password"
                         placeholder="Password"
-                        autoComplete="off"
                     ></input>
                     <button className="btn" onClick={() => this.handleClick()}>
-                        Submit
+                        Login
                     </button>
+
                     <p>
-                        Click <Link to="/login">here</Link> to log in
+                        Don't have an account yet? Click{" "}
+                        <Link to="/">here</Link> to sign up
                     </p>
+                    <p>
+                        Forgot your password? Click{" "}
+                        <Link to="/password/reset/start">here</Link> to reset
+                    </p>
+
                     {this.state.error && (
-                        <p>Oops something went wrong! Please try again.</p>
+                        <p>
+                            This email or password doesn't exist. Please try
+                            again.
+                        </p>
                     )}
                 </div>
             </div>

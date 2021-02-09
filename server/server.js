@@ -3,12 +3,11 @@ const app = express();
 const compression = require("compression");
 const path = require("path");
 const db = require("./db");
-
+const csurf = require("csurf");
+const { sendEmail } = require("./ses");
+const cryptoRandomString = require("crypto-random-string");
 const cookieSession = require("cookie-session");
-// const { hash, compare } = require("./bc");
-const { hash } = require("./bc");
-
-// const csurf = require("csurf");
+const { hash, compare } = require("./bc");
 
 let cookie_sec;
 
@@ -29,6 +28,13 @@ app.use(
         secret: cookie_sec,
     })
 ); // equals to 2 weeks
+
+app.use(csurf());
+
+app.use(function (req, res, next) {
+    res.cookie("mytoken", req.csrfToken());
+    next();
+});
 
 app.get("/welcome", (req, res) => {
     console.log("I'm the welcome page");
@@ -65,7 +71,164 @@ app.post("/registration", (req, res) => {
     }
 });
 
-app.get("*", function (req, res) {
+app.post("/login", (req, res) => {
+    console.log("I am the post login route");
+    const { email, password } = req.body;
+
+    db.getLoginData(email)
+        .then(({ rows }) => {
+            const hashedPw = rows[0].password;
+            console.log("user trying to login");
+            console.log("rows: ", rows);
+
+            compare(password, hashedPw)
+                .then((match) => {
+                    if (match) {
+                        req.session.userId = rows[0].id;
+                        req.session.loggedIn = rows[0].id;
+                        res.json({ success: true });
+                    } else {
+                        res.json({ success: false });
+                    }
+                })
+                .catch((err) => {
+                    console.log("err in compare:", err);
+                    res.json({ success: false });
+                });
+        })
+        .catch((err) => {
+            console.log("there was an error in post login: ", err);
+            res.json({ success: false });
+        });
+});
+
+app.post("/password/reset/start", (req, res) => {
+    console.log("I am the /password/reset/start route");
+    const { email } = req.body;
+
+    db.getLoginData(email)
+        .then(({ rows }) => {
+            console.log("the user exists!");
+            console.log("rows :", rows);
+            const emailDB = rows[0].email;
+            console.log("emaildb: ", emailDB);
+            // generates a random code
+            const secretCode = cryptoRandomString({
+                length: 6,
+            });
+            if (req.body.email === emailDB) {
+                db.insertCode(email, secretCode)
+                    .then(() => {
+                        console.log("rows :", rows);
+                        console.log("code was inserted in DB");
+
+                        sendEmail(
+                            email,
+                            secretCode,
+                            "Here is your code to reset your password"
+                        )
+                            .then(() => {
+                                console.log("rows :", rows);
+                                console.log("yay");
+                                res.json({ success: true });
+                            })
+                            .catch((err) => {
+                                console.log(
+                                    "error in send email with code",
+                                    err
+                                );
+                                res.json({ success: false });
+                            });
+                    })
+                    .catch((err) => {
+                        console.log(
+                            "there was an error in inserting the code: ",
+                            err
+                        );
+                        res.json({ success: false });
+                    });
+            } else {
+                res.json({ success: false });
+            }
+        })
+        .catch((err) => {
+            console.log("there was an error in password reset: ", err);
+            res.json({ success: false });
+        });
+});
+
+app.post("/password/reset/verify", (req, res) => {
+    console.log("I am the /password/reset/verify route");
+    const { code, password } = req.body;
+
+    db.verifyCode(code)
+        .then(({ rows }) => {
+            const emailCode = rows[0].email;
+            // const codeDB = rows[0].code;
+
+            let currentCode = rows.find((row) => {
+                return row.code === req.body.code;
+            });
+
+            if (currentCode) {
+                hash(password)
+                    .then((hashedPw) => {
+                        db.updatePassword(emailCode, hashedPw)
+                            .then(() => {
+                                // console.log("rows: ", rows);
+
+                                res.json({ success: true });
+                            })
+                            .catch((err) => {
+                                console.log("error in insert user data", err);
+                                res.json({ success: false });
+                            });
+                    })
+                    .catch((err) => {
+                        console.log("error in hashing pass: ", err);
+                    });
+            } else {
+                res.json({ success: false });
+            }
+        })
+        .catch((err) => {
+            console.log("There was an error with verifying code: ", err);
+        });
+    /*
+        1.verify the code the user entered is correct
+        2. take a new password, hash it, and store it in users - upsert probably needed 
+    */
+
+    /*
+        verifying the code
+        1. make select request to reset_codes to retrieve code 
+        2. we give users 10 min to enter new password using this code 
+
+        SELECT * FROM my_table
+        WHERE CURRENT_TIMESTAMP - created_at < INTERVAL '10 minutes';
+    */
+
+    /*  IF CODE EXPIRED 
+        if the code is expired we need to send back a message to react (user needs to enter email again)
+
+        IF CODE NOT EXPIRED
+        check if the code we received from the user (req.body) matches code in DB
+
+        IF CODE DON'T MATCH
+        send back response to react indicating failure error (success: false)
+        React should allow user to enter again the code
+
+        IF CODE MATCH
+        hash password, update users and send back a success: true message to react 
+    */
+});
+
+app.get("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/welcome");
+});
+
+app.get("*", (req, res) => {
     if (!req.session.userId) {
         // if user not logged in redirect to welcome
         res.redirect("/welcome");

@@ -1,32 +1,61 @@
-body {
-    background-color: white;
+* {
+    box-sizing: border-box;
+    margin: 0;
 }
 .logo {
     width: 100px;
 }
 
 main {
-    /* display: grid;
-    grid-template-rows: 50px 1fr 40px; */
     font-family: "PT Sans", sans-serif;
 }
 
-.main-container {
+header {
+    grid-row: 1/2;
+    height: 100%;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.super-container {
+    height: 100vh;
+    display: flex;
+
     justify-content: center;
     align-items: center;
+}
+
+.welcome-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.right-box {
+    display: flex;
+    flex-direction: column;
+    background-color: #9870fc;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
 }
 
 input {
     min-width: 300px;
     width: 20%;
+    color: white;
     font-size: 1em;
     padding: 7px 11px;
     margin: 5px 20px;
     background-color: transparent;
     border: none;
-    border-bottom: 2px solid #9870fc;
+    border-bottom: 2px solid white;
 }
 
 input:focus {
@@ -37,19 +66,30 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px white inset;
+    -webkit-box-shadow: 0 0 0 30px #9870fc inset;
 }
-.btn-register {
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+}
+.btn {
     margin-top: 10px;
-    width: 80px;
+    color: #9870fc;
     height: 30px;
     font-size: 15px;
     border-radius: 15px;
     border: 1px solid #9870fc;
-    background-color: #9870fc;
+    background-color: white;
 }
 
-.btn-register:focus {
+.reset-title,
+.reg-title,
+.signup-title,
+.login-title {
+    color: white;
+}
+
+.btn:focus {
     outline: none;
 }
 
@@ -61,6 +101,10 @@ input:-webkit-autofill:active {
 }
 
 .reg-text {
-    width: 50%;
-    text-align: center;
+    width: 60%;
+    text-align: justify;
+}
+
+p {
+    margin-top: 10px;
 }

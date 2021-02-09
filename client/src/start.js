@@ -1,11 +1,12 @@
 import ReactDOM from "react-dom";
-import Welcome from "./welcome.js";
+import Welcome from "./Welcome";
+import Logo from "./Logo";
 
 let elem;
 if (location.pathname === "/welcome") {
     elem = <Welcome />;
 } else {
-    elem = <img className="logo" src="vinyl-black.svg" alt="vinyl logo" />;
+    elem = <Logo />;
 }
 
 ReactDOM.render(elem, document.querySelector("main"));
