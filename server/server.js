@@ -8,6 +8,9 @@ const { sendEmail } = require("./ses");
 const cryptoRandomString = require("crypto-random-string");
 const cookieSession = require("cookie-session");
 const { hash, compare } = require("./bc");
+const s3 = require("./s3");
+const config = require("../config");
+const { uploader } = require("./upload");
 
 let cookie_sec;
 
@@ -47,27 +50,53 @@ app.get("/welcome", (req, res) => {
     }
 });
 
-app.post("/registration", (req, res) => {
-    console.log("I am the post registration route");
+// app.post("/registration", (req, res) => {
+//     console.log("I am the post registration route");
 
+//     const { first, last, email, password } = req.body;
+//     if (first && last && email && password) {
+//         hash(password).then((hashedPw) => {
+//             db.insertUserData(first, last, email, hashedPw)
+//                 .then(({ rows }) => {
+//                     // console.log("rows: ", rows);
+//                     req.session.userId = rows[0].id;
+
+//                     res.json({ success: true, data: rows[0] });
+//                 })
+//                 .catch((err) => {
+//                     console.log("error in insert user data", err);
+//                     res.json({ success: false });
+//                 });
+//         });
+//     } else {
+//         console.log("please fill out every field");
+//         res.json({ success: false });
+//     }
+// });
+
+app.post("/registration", async (req, res) => {
     const { first, last, email, password } = req.body;
-    if (first && last && email && password) {
-        hash(password).then((hashedPw) => {
-            db.insertUserData(first, last, email, hashedPw)
-                .then(({ rows }) => {
-                    // console.log("rows: ", rows);
-                    req.session.userId = rows[0].id;
 
-                    res.json({ success: true, data: rows[0] });
-                })
-                .catch((err) => {
-                    console.log("error in insert user data", err);
-                    res.json({ success: false });
-                });
-        });
+    if (first && last && email && password) {
+        try {
+            const hashedPw = await hash(password);
+            const results = await db.insertUserData(
+                first,
+                last,
+                email,
+                hashedPw
+            );
+            req.session.userId = results.rows[0].id;
+            res.json({ success: true });
+        } catch (err) {
+            console.log("err in POST registration", err);
+            res.json({ success: false });
+            //error.message gives only the message from error and not the whole block
+            //error.code
+        }
     } else {
-        console.log("please fill out every field");
         res.json({ success: false });
+        // please fill out all fields error
     }
 });
 
@@ -100,6 +129,47 @@ app.post("/login", (req, res) => {
             console.log("there was an error in post login: ", err);
             res.json({ success: false });
         });
+});
+
+app.get("/user", (req, res) => {
+    console.log("I'm the user get route");
+    console.log(req.session.userId);
+    db.fetchUserData(req.session.userId)
+        .then(({ rows }) => {
+            console.log("getting all user info");
+            console.log("rows", rows);
+            res.json({ success: true, userId: req.session.userId });
+        })
+        .catch((err) => {
+            console.log("there was an error in fetching user data: ", err);
+            res.json({ success: false });
+        });
+});
+
+app.post("/profile-pic", uploader.single("file"), s3.upload, (req, res) => {
+    console.log("I'm the post route user/profile-pic");
+
+    const fullUrl = config.s3Url + filename;
+    const { filename } = req.file;
+    console.log("req.session.userId: ", req.session.userId);
+
+    if (req.file) {
+        db.uploadPic(req.session.userId, fullUrl)
+            .then(({ rows }) => {
+                console.log("rows: ", rows);
+                res.json({ success: true });
+            })
+            .catch((err) => {
+                console.log(
+                    "there was an error with uploading profile pic: ",
+                    err
+                );
+                res.json({ success: false });
+            });
+    } else {
+        console.log("file too big");
+        res.json({ success: false });
+    }
 });
 
 app.post("/password/reset/start", (req, res) => {

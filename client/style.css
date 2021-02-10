@@ -72,6 +72,10 @@ input:-webkit-autofill:active {
 input:-webkit-autofill {
     -webkit-text-fill-color: white !important;
 }
+
+::-webkit-input-placeholder {
+    color: black;
+}
 .btn {
     margin-top: 10px;
     color: #9870fc;

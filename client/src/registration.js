@@ -94,7 +94,8 @@ export default class Registration extends React.Component {
                         Submit
                     </button>
                     <p>
-                        Click <Link to="/login">here</Link> to log in
+                        Already have an account? Click{" "}
+                        <Link to="/login">here</Link> to log in
                     </p>
                     {this.state.error && (
                         <p>Oops something went wrong! Please try again.</p>

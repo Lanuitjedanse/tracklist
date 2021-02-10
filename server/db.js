@@ -44,3 +44,17 @@ module.exports.updatePassword = (email, hashedPw) => {
     const params = [email, hashedPw];
     return db.query(q, params);
 };
+
+module.exports.fetchUserData = (userId) => {
+    const q = `SELECT * FROM users WHERE id = $1`;
+    const params = [userId];
+    return db.query(q, params);
+};
+
+module.exports.uploadPic = (userId, profilePicUrl) => {
+    const q = `UPDATE users
+    SET profile_pic_url = $2
+    WHERE id = $1`;
+    const params = [userId, profilePicUrl];
+    return db.query(q, params);
+};
