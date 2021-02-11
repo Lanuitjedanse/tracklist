@@ -170,9 +170,24 @@ app.post("/profile-pic", uploader.single("file"), s3.upload, (req, res) => {
                 res.json({ success: false });
             });
     } else {
-        console.log("file too big");
+        console.log("please add a file!");
         res.json({ success: false });
     }
+});
+
+app.post("/bio", (req, res) => {
+    console.log("I am the bio post route");
+    const { bio } = req.body;
+
+    db.editBio(req.session.userId, bio)
+        .then(({ rows }) => {
+            console.log("rows:", rows[0].bio);
+            res.json({ success: true, bio: rows[0].bio });
+        })
+        .catch((err) => {
+            console.log("there was an error in edit bio post: ", err);
+            res.json({ success: false });
+        });
 });
 
 app.post("/password/reset/start", (req, res) => {

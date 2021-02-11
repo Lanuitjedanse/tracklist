@@ -34,11 +34,8 @@ export default class Registration extends React.Component {
         axios
             .post("/registration", this.state)
             .then((response) => {
-                console.log("response from server: ", response);
-                // need to look at the response and make sure there is no error message sent from server
-                // for example, the server might send back a msg that says
-                // "the user forgot to fill in an input field"
-                // in this case we need to render an error message for the user
+                // console.log("response from server: ", response);
+
                 if (!response.data.success) {
                     //handle error
                     this.setState({

@@ -51,8 +51,9 @@ export default class Uploader extends Component {
         // update the state of app with the new profile pic once it is available
     }
     render() {
+        console.log("this.prop in uploader: ", this.props);
         return (
-            <div className={"uploader"}>
+            <div className="uploader border-orange">
                 <input
                     onChange={(e) => this.handleChange(e)}
                     name="file"

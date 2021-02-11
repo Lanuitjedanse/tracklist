@@ -18,12 +18,6 @@ export default class ResetPassword extends React.Component {
         });
     }
 
-    // emptyFields() {
-    //     this.code.value = "";
-    //     this.password.value = "";
-    //     this.email.value = "";
-    // }
-
     handleClick() {
         let route = [
             "none",
@@ -35,7 +29,7 @@ export default class ResetPassword extends React.Component {
         axios
             .post(route[this.state.renderView], this.state)
             .then((response) => {
-                console.log("response from server: ", response);
+                // console.log("respon/se from server: ", response);
 
                 if (!response.data.success) {
                     this.setState({
