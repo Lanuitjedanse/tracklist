@@ -9,23 +9,25 @@ export default class App extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { uploaderVisible: false };
+        this.state = {
+            uploaderVisible: false,
+        };
+        this.toggleUploader = this.toggleUploader.bind(this);
     }
 
     componentDidMount() {
         //TODO: Fetch current user's data from DB
         // Once you get the data back, set it to the state
         //req.session.userId (send it back with res.json)
-
         axios
-            .get("/user", this.state)
+            .get("/user")
             .then((response) => {
                 console.log("axios get user");
-                console.log("response.data.success: ", response);
+                console.log("response.data.success: ", response.data.rows);
                 this.setState({
-                    firstName: this.firstName,
-                    lastName: this.lastName,
-                    profilePicUrl: this.profilePicUrl,
+                    firstName: response.data.rows.first,
+                    lastName: response.data.rows.last,
+                    profilePicUrl: response.data.rows.profile_pic_url,
                 });
             })
             .catch((err) => {
@@ -40,9 +42,10 @@ export default class App extends Component {
     }
 
     setProfilePicUrl(profilePicUrl) {
-        // TODO: Updates the "profilePicUrl" in the state
-        // TODO: Hides the uploader
-        this.setState({ profilePicUrl });
+        this.setState({
+            profilePicUrl: profilePicUrl,
+            // uploaderVisible: false,
+        });
     }
 
     render() {
@@ -50,18 +53,19 @@ export default class App extends Component {
             <div className="app">
                 <button
                     onClick={() => this.toggleUploader()} // need to change that
-                ></button>
+                >
+                    button
+                </button>
                 <Logo />
                 <ProfilePic
-                    firstName={this.firstName}
-                    lastName={this.lastName}
+                    firstName={this.state.firstName}
+                    lastName={this.state.lastName}
                     profilePicUrl={this.state.profilePicUrl}
+                    uploaderVisible={this.state.uploaderVisible}
                     toggleUploader={this.toggleUploader}
                 />
                 {this.state.uploaderVisible && (
-                    <Uploader
-                        setProfilePicUrl={() => this.setProfilePicUrl()}
-                    />
+                    <Uploader setProfilePicUrl={this.setProfilePicUrl} />
                 )}
             </div>
         );

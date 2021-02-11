@@ -1,4 +1,4 @@
-import Component from "react";
+import { Component } from "react";
 import axios from "./Axios";
 // import ProfilePic from "./ProfilePic";
 // export function Uploader() {
@@ -12,35 +12,33 @@ export default class Uploader extends Component {
             error: false,
             file: null,
         };
-        this.submit = this.submit.bind(this);
+        // this.submit = this.submit.bind(this);
     }
 
     handleChange(e) {
-        e.preventDefault();
-        this.file = e.target.files[0];
+        this.setState({
+            file: e.target.files[0],
+        });
     }
 
-    submit() {
+    submit(e) {
+        e.preventDefault();
         //Axios request
         // we can use code from imageboard
         // need to add column to users table profilepicurl
-        const formData = new FormData();
-        formData.append("profilePic", this.state);
+        let formData = new FormData();
+        formData.append("file", this.state.file);
 
         axios
-            .post("/profile-pic", this.state)
+            .post("/profile-pic", formData)
             .then((response) => {
                 console.log("profile pic woop woop!");
-                if (response.data.success) {
-                    this.setState({
-                        error: false,
-                        file: this.file,
-                    });
-                } else {
-                    this.setState({
-                        error: true,
-                    });
-                }
+                console.log(
+                    "response.data.rows profile pic: ",
+                    response.data.rows
+                );
+
+                this.props.setProfilePicUrl(response.data.rows);
             })
             .catch((err) => {
                 console.log("err in axios post profile pic: ", err);
@@ -57,46 +55,13 @@ export default class Uploader extends Component {
             <div className={"uploader"}>
                 <input
                     onChange={(e) => this.handleChange(e)}
+                    name="file"
                     type="file"
+                    accept="image/*"
                 ></input>
-                <button onClick={this.submit}>Upload</button>
+                <button onClick={(e) => this.submit(e)}>Upload</button>
                 {this.state.error && <p>Oops something went wrong.</p>}
             </div>
         );
     }
 }
-
-//  fd.append("title", this.title);
-//     fd.append("description", this.description);
-//     fd.append("username", this.username);
-//     fd.append("file", this.file);
-
-//     axios
-//         .post("/upload", fd)
-//         .then(function (response) {
-//             if (response.data.success) {
-//                 self.errorMessage = null;
-//                 self.images.unshift(response.data.data);
-//                 self.title = "";
-//                 self.description = "";
-//                 self.username = "";
-//                 self.$refs.fileInput.value = null;
-//             } else {
-//                 self.errorMessage = "File missing";
-//                 console.log("error");
-//             }
-//         })
-//         .catch(function (err) {
-//             console.log("error in post upload: ", err);
-//             self.errorMessage =
-//                 "Fill out all the fields, or file is too large (max 2MB)";
-//             self.title = "";
-//             self.description = "";
-//             self.username = "";
-//             self.$refs.fileInput.value = null;
-//         });
-// },
-
-// fileSelectHandler: function (e) {
-//     this.file = e.target.files[0];
-// },

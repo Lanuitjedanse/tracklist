@@ -1,10 +1,12 @@
 export default function ProfilePic(props) {
-    console.log(props);
+    console.log("props: ", props);
+    let { firstName, lastName, profilePicUrl, toggleUploader } = props;
+
     return (
-        <div onClick={props.toggleUploader} className="profile-pic">
+        <div onClick={toggleUploader} className="profile-pic">
             <img
-                src={props.ProfilePicUrl || "avatar.png"} // need to change this
-                alt={`${props.firstName}`}
+                src={profilePicUrl || "avatar.png"} // need to change this
+                alt={`${firstName}, ${lastName}`}
             />
         </div>
     );

@@ -77,6 +77,7 @@ export default class ResetPassword extends React.Component {
                         onChange={(e) => this.handleChange(e)}
                         name="code"
                         type="text"
+                        key={1}
                         placeholder="Code"
                     ></input>
                     <input

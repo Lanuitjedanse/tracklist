@@ -137,8 +137,8 @@ app.get("/user", (req, res) => {
     db.fetchUserData(req.session.userId)
         .then(({ rows }) => {
             console.log("getting all user info");
-            console.log("rows", rows);
-            res.json({ success: true, userId: req.session.userId });
+            console.log("rows", rows[0]);
+            res.json({ success: true, rows: rows[0] });
         })
         .catch((err) => {
             console.log("there was an error in fetching user data: ", err);
@@ -148,16 +148,19 @@ app.get("/user", (req, res) => {
 
 app.post("/profile-pic", uploader.single("file"), s3.upload, (req, res) => {
     console.log("I'm the post route user/profile-pic");
-
-    const fullUrl = config.s3Url + filename;
     const { filename } = req.file;
+    const fullUrl = config.s3Url + filename;
+
     console.log("req.session.userId: ", req.session.userId);
 
     if (req.file) {
         db.uploadPic(req.session.userId, fullUrl)
             .then(({ rows }) => {
-                console.log("rows: ", rows);
-                res.json({ success: true });
+                // console.log(
+                //     "rows[0].profile_pic_url : ",
+                //     rows[0].profile_pic_url
+                // );
+                res.json({ success: true, rows: rows[0].profile_pic_url });
             })
             .catch((err) => {
                 console.log(

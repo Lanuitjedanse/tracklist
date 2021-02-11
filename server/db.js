@@ -54,7 +54,7 @@ module.exports.fetchUserData = (userId) => {
 module.exports.uploadPic = (userId, profilePicUrl) => {
     const q = `UPDATE users
     SET profile_pic_url = $2
-    WHERE id = $1`;
+    WHERE id = $1 RETURNING profile_pic_url`;
     const params = [userId, profilePicUrl];
     return db.query(q, params);
 };
