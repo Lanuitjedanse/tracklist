@@ -53,6 +53,7 @@ export default class ResetPassword extends React.Component {
                 <div className="reg-box">
                     <h2 className="reset-title">Reset password</h2>
                     <input
+                        className="reg-field"
                         onChange={(e) => this.handleChange(e)}
                         name="email"
                         type="email"
@@ -68,6 +69,7 @@ export default class ResetPassword extends React.Component {
                 <div className="reg-box">
                     <h2 className="reset-title">Reset password</h2>
                     <input
+                        className="reg-field"
                         onChange={(e) => this.handleChange(e)}
                         name="code"
                         type="text"
@@ -75,6 +77,7 @@ export default class ResetPassword extends React.Component {
                         placeholder="Code"
                     ></input>
                     <input
+                        className="reg-field"
                         onChange={(e) => this.handleChange(e)}
                         name="password"
                         type="password"
@@ -91,10 +94,9 @@ export default class ResetPassword extends React.Component {
                     <h2 className="reset-title">
                         Yay your password was updated!
                     </h2>
-                    <p>
-                        You can now <Link to="/login">log in</Link> with your
-                        new password!
-                    </p>
+                    <Link className="link-log" to="/login">
+                        You can now log in with your new password!{" "}
+                    </Link>
                 </div>
             );
         }
@@ -103,7 +105,9 @@ export default class ResetPassword extends React.Component {
         return (
             <div className="right-box">
                 {this.determineView()}
-                {this.state.error && <p>Oops something went wrong.</p>}
+                {this.state.error && (
+                    <p className="error-msg">Oops something went wrong.</p>
+                )}
             </div>
         );
     }

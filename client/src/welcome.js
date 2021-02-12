@@ -10,7 +10,7 @@ export default function Welcome() {
         <div className="super-container">
             <div className="welcome-box">
                 <Logo />
-                <h2>Tracklist</h2>
+                <h2 className="brand-title">Tracklist</h2>
                 <p className="reg-text">
                     I am baby chia trust fund cred kale chips chartreuse celiac
                     irony schlitz. Shaman beard kitsch, farm-to-table cray

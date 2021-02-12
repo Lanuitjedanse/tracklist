@@ -48,12 +48,14 @@ export default class Login extends React.Component {
                 <div className="reg-box">
                     <h2 className="login-title">Login</h2>
                     <input
+                        className="reg-field"
                         onChange={(e) => this.handleChange(e)}
                         name="email"
                         type="email"
                         placeholder="Email"
                     ></input>
                     <input
+                        className="reg-field"
                         onChange={(e) => this.handleChange(e)}
                         name="password"
                         type="password"
@@ -63,17 +65,15 @@ export default class Login extends React.Component {
                         Login
                     </button>
 
-                    <p>
-                        Don't have an account yet? Click{" "}
-                        <Link to="/">here</Link> to sign up
-                    </p>
-                    <p>
-                        Forgot your password? Click{" "}
-                        <Link to="/password/reset/start">here</Link> to reset
-                    </p>
+                    <Link className="link-log" to="/">
+                        Don't have an account yet? Click here to sign up
+                    </Link>
+                    <Link className="link-log" to="/password/reset/start">
+                        Forgot your password? Click here to reset
+                    </Link>
 
                     {this.state.error && (
-                        <p>
+                        <p className="error-msg">
                             This email or password doesn't exist. Please try
                             again.
                         </p>

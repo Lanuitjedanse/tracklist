@@ -60,6 +60,7 @@ export default class Registration extends React.Component {
                     <h2 className="signup-title">Sign up</h2>
 
                     <input
+                        className="reg-field"
                         onChange={(e) => this.handleChange(e)}
                         name="first"
                         type="text"
@@ -67,6 +68,7 @@ export default class Registration extends React.Component {
                         autoComplete="off"
                     ></input>
                     <input
+                        className="reg-field"
                         onChange={(e) => this.handleChange(e)}
                         name="last"
                         type="text"
@@ -74,6 +76,7 @@ export default class Registration extends React.Component {
                         autoComplete="off"
                     ></input>
                     <input
+                        className="reg-field"
                         onChange={(e) => this.handleChange(e)}
                         name="email"
                         type="email"
@@ -81,6 +84,7 @@ export default class Registration extends React.Component {
                         autoComplete="off"
                     ></input>
                     <input
+                        className="reg-field"
                         onChange={(e) => this.handleChange(e)}
                         name="password"
                         type="password"
@@ -90,12 +94,14 @@ export default class Registration extends React.Component {
                     <button className="btn" onClick={() => this.handleClick()}>
                         Submit
                     </button>
-                    <p>
-                        Already have an account? Click{" "}
-                        <Link to="/login">here</Link> to log in
-                    </p>
+                    <Link className="link-log" to="/login">
+                        Already have an account? Click here to log in
+                    </Link>
+
                     {this.state.error && (
-                        <p>Oops something went wrong! Please try again.</p>
+                        <p className="error-msg">
+                            Oops something went wrong! Please try again.
+                        </p>
                     )}
                 </div>
             </div>

@@ -51,8 +51,7 @@ export default class BioEditor extends React.Component {
 
         if (this.state.editingMode) {
             return (
-                <div>
-                    <h1>Edit mode</h1>
+                <div className="bio">
                     <textarea
                         onChange={(e) => this.handleChange(e)}
                         defaultValue={
@@ -62,11 +61,16 @@ export default class BioEditor extends React.Component {
                         }
                         name="bio"
                     ></textarea>
-                    <button onClick={(e) => this.bioHandleClick(e)}>
+                    <button
+                        className="btn-purple"
+                        onClick={(e) => this.bioHandleClick(e)}
+                    >
                         Save Bio
                     </button>
                     {this.state.error && (
-                        <p>Oops something went wrong! Please try again.</p>
+                        <p className="error-msg-dark">
+                            Oops something went wrong! Please try again.
+                        </p>
                     )}
                 </div>
             );
@@ -74,13 +78,17 @@ export default class BioEditor extends React.Component {
 
         return (
             <div className="bio border-acqua">
-                <h1>I am the bio editor</h1>
-                <p>{this.state.bio}</p>
-                <button onClick={() => this.editingIsVisible()}>
+                <p className="bio-text">{this.state.bio}</p>
+                <button
+                    className="btn-purple"
+                    onClick={() => this.editingIsVisible()}
+                >
                     {this.state.bio ? "Edit Bio" : "Add Bio"}
                 </button>
                 {this.state.error && (
-                    <p>Oops something went wrong! Please try again.</p>
+                    <p className="error-msg-dark">
+                        Oops something went wrong! Please try again.
+                    </p>
                 )}
             </div>
         );

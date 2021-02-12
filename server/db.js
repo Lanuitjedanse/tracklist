@@ -45,8 +45,8 @@ module.exports.updatePassword = (email, hashedPw) => {
     return db.query(q, params);
 };
 
-module.exports.fetchUserData = (userId) => {
-    const q = `SELECT * FROM users WHERE id = $1`;
+module.exports.fetchProfileData = (userId) => {
+    const q = `SELECT id, first, last, profile_pic_url, bio FROM users WHERE id = $1`;
     const params = [userId];
     return db.query(q, params);
 };

@@ -131,10 +131,10 @@ app.post("/login", (req, res) => {
         });
 });
 
-app.get("/user", (req, res) => {
+app.get("/api/user", (req, res) => {
     console.log("I'm the user get route");
     console.log(req.session.userId);
-    db.fetchUserData(req.session.userId)
+    db.fetchProfileData(req.session.userId)
         .then(({ rows }) => {
             console.log("getting all user info");
             console.log("rows", rows[0]);
@@ -274,6 +274,7 @@ app.post("/password/reset/verify", (req, res) => {
                     })
                     .catch((err) => {
                         console.log("error in hashing pass: ", err);
+                        res.json({ success: false });
                     });
             } else {
                 res.json({ success: false });
@@ -281,39 +282,36 @@ app.post("/password/reset/verify", (req, res) => {
         })
         .catch((err) => {
             console.log("There was an error with verifying code: ", err);
+            res.json({ success: false });
         });
-    /*
-        1.verify the code the user entered is correct
-        2. take a new password, hash it, and store it in users - upsert probably needed 
-    */
+});
 
-    /*
-        verifying the code
-        1. make select request to reset_codes to retrieve code 
-        2. we give users 10 min to enter new password using this code 
+app.get("/show-users/:id", (req, res) => {
+    const { id } = req.params;
+    console.log("id: ", id);
+    console.log("req.session.userId", req.session.userId);
 
-        SELECT * FROM my_table
-        WHERE CURRENT_TIMESTAMP - created_at < INTERVAL '10 minutes';
-    */
+    db.fetchProfileData(id)
+        .then(({ rows }) => {
+            console.log("getting all user info");
+            console.log("rows", rows[0]);
 
-    /*  IF CODE EXPIRED 
-        if the code is expired we need to send back a message to react (user needs to enter email again)
-
-        IF CODE NOT EXPIRED
-        check if the code we received from the user (req.body) matches code in DB
-
-        IF CODE DON'T MATCH
-        send back response to react indicating failure error (success: false)
-        React should allow user to enter again the code
-
-        IF CODE MATCH
-        hash password, update users and send back a success: true message to react 
-    */
+            res.json({
+                success: true,
+                rows: rows[0],
+                cookie: req.session.userId,
+            });
+        })
+        .catch((err) => {
+            console.log("there was an error in fetching user data: ", err);
+            res.json({ success: false });
+        });
 });
 
 app.get("/logout", (req, res) => {
     req.session = null;
     res.redirect("/welcome");
+    // doesn't matter to put an anchor tag
 });
 
 app.get("*", (req, res) => {

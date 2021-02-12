@@ -1,11 +1,12 @@
 import { Component } from "react";
 // import React from "react";
 import axios from "./Axios";
-
 // import ProfilePic from "./ProfilePic";
 import Uploader from "./Uploader";
 import Profile from "./Profile";
 import Header from "./Header";
+import OtherProfile from "./OtherProfile";
+import { BrowserRouter, Route } from "react-router-dom";
 
 export default class App extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ export default class App extends Component {
         console.log("component mounted");
 
         axios
-            .get("/user")
+            .get("/api/user")
             .then((response) => {
                 // console.log("axios get user");
                 // console.log("response.data.success: ", response.data.rows);
@@ -55,38 +56,59 @@ export default class App extends Component {
         console.log("this.state in app: ", this.state);
 
         if (!this.state.id) {
-            // return null;
-            return (
-                <div className="spinner-container">
-                    <p>spinner container</p>
-                </div>
-            );
+            return null;
+            // return (
+            //     <div className="spinner-container">
+            //         <p>spinner container</p>
+            //     </div>
+            // );
         }
         return (
-            <div className="app">
-                <Header
-                    firstName={this.state.firstName}
-                    lastName={this.state.lastName}
-                    profilePicUrl={this.state.profilePicUrl}
-                    uploaderVisible={this.state.uploaderVisible}
-                    toggleUploader={this.toggleUploader}
-                    size="small"
-                />
-
-                {this.state.uploaderVisible && (
-                    <Uploader
-                        setProfilePicUrl={(profilePicUrl) =>
-                            this.setProfilePicUrl(profilePicUrl)
-                        }
+            <BrowserRouter>
+                <div className="app">
+                    <Header
+                        firstName={this.state.firstName}
+                        lastName={this.state.lastName}
+                        profilePicUrl={this.state.profilePicUrl}
+                        uploaderVisible={this.state.uploaderVisible}
+                        toggleUploader={this.toggleUploader}
+                        size="small"
                     />
-                )}
-                <Profile
-                    firstName={this.state.firstName}
-                    lastName={this.state.lastName}
-                    profilePicUrl={this.state.profilePicUrl}
-                    bio={this.state.bio}
-                />
-            </div>
+
+                    {this.state.uploaderVisible && (
+                        <Uploader
+                            setProfilePicUrl={(profilePicUrl) =>
+                                this.setProfilePicUrl(profilePicUrl)
+                            }
+                        />
+                    )}
+                    <Route
+                        exact
+                        path="/"
+                        render={() => (
+                            <Profile
+                                id={this.state.id}
+                                firstName={this.state.firstName}
+                                lastName={this.state.lastName}
+                                profilePicUrl={this.state.profilePicUrl}
+                                bio={this.state.bio}
+                            />
+                        )}
+                    />
+                    <Route
+                        path="/user/:id"
+                        render={(props) => (
+                            <OtherProfile
+                                key={props.match.url}
+                                match={props.match}
+                                history={props.history}
+                            />
+                        )}
+                    />
+                </div>
+            </BrowserRouter>
         );
     }
 }
+
+// make sure to not name the route and axios the same otherwise you will see json
