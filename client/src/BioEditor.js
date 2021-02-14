@@ -56,7 +56,7 @@ export default class BioEditor extends React.Component {
                         onChange={(e) => this.handleChange(e)}
                         defaultValue={
                             this.state.bio
-                                ? `${this.state.bio}`
+                                ? this.state.bio
                                 : "Please tell us a bit more about yourself"
                         }
                         name="bio"

@@ -72,9 +72,9 @@ export default class OtherProfile extends Component {
                     </p>
                 )}
                 <iframe
-                    src="https://giphy.com/embed/AAZWN2T2rmMFxqIfzw"
+                    src="https://giphy.com/embed/11lE4F9K9UlqRa"
                     width="480"
-                    height="270"
+                    height="317"
                     frameBorder="0"
                     className="giphy-embed"
                     allowFullScreen

@@ -1,6 +1,7 @@
 // import React from "react";
 import ProfilePic from "./ProfilePic";
 import LogoWhite from "./LogoWhite";
+import Logout from "./Logout";
 
 export default function Header(props) {
     console.log("props: ", props);
@@ -10,7 +11,17 @@ export default function Header(props) {
                 <LogoWhite />
                 <h2 className="brand-header">Tracklist</h2>
             </div>
-            <ProfilePic {...props} />
+            <div className="log-pic-box">
+                <Logout />
+                <ProfilePic {...props} />
+            </div>
         </header>
     );
+}
+
+{
+    /* <div>
+    <ProfilePic {...props} />
+    <Logout />
+</div>; */
 }

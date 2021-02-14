@@ -78,7 +78,7 @@ header {
 }
 
 ::-webkit-input-placeholder {
-    color: #ffdcdc;
+    color: #fdcfdf;
 }
 .btn {
     margin: 10px 0;
@@ -173,12 +173,21 @@ header {
     min-width: 100px;
 }
 
+.btn-purple:hover {
+    background-color: transparent;
+    border: 1px solid #9870fc;
+    color: #9870fc;
+}
+.btn:hover {
+    background-color: #9870fc;
+    border: 1px solid white;
+    color: white;
+}
 .btn-purple:focus {
     outline: none;
 }
 
 .bio {
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -232,6 +241,30 @@ textarea:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.log-pic-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout {
+    height: 30px;
+}
+
+.profile-pic-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.camera-icon {
+    width: 30px;
+    margin-top: -29px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
 /* .border-green {

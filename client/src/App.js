@@ -92,6 +92,7 @@ export default class App extends Component {
                                 lastName={this.state.lastName}
                                 profilePicUrl={this.state.profilePicUrl}
                                 bio={this.state.bio}
+                                toggleUploader={this.toggleUploader}
                             />
                         )}
                     />

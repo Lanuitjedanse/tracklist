@@ -1,21 +1,28 @@
 import ProfilePic from "./ProfilePic";
 import BioEditor from "./BioEditor";
-// import Uploader from "./Uploader";
 
 export default function Profile(props) {
     console.log("props in profile: ", props);
+    console.log(props.toggleUploader);
     return (
         <div className="profile-box border-pink">
-            <ProfilePic
-                firstName={props.firstName}
-                lastName={props.lastName}
-                profilePicUrl={props.profilePicUrl}
-                className="profile-pic"
-            />
+            <div className="profile-pic-box">
+                <ProfilePic
+                    firstName={props.firstName}
+                    lastName={props.lastName}
+                    profilePicUrl={props.profilePicUrl}
+                    className="profile-pic"
+                />
+                <img
+                    className="camera-icon"
+                    src="/camera.svg"
+                    onClick={props.toggleUploader}
+                />
+            </div>
+
             <h3>
                 {props.firstName} {props.lastName}
             </h3>
-
             <BioEditor bio={props.bio} />
         </div>
     );

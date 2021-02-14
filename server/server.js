@@ -274,7 +274,6 @@ app.post("/password/reset/verify", (req, res) => {
                     })
                     .catch((err) => {
                         console.log("error in hashing pass: ", err);
-                        res.json({ success: false });
                     });
             } else {
                 res.json({ success: false });
@@ -282,7 +281,6 @@ app.post("/password/reset/verify", (req, res) => {
         })
         .catch((err) => {
             console.log("There was an error with verifying code: ", err);
-            res.json({ success: false });
         });
 });
 
