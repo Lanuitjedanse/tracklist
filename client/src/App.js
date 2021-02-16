@@ -54,7 +54,7 @@ export default class App extends Component {
     }
 
     render() {
-        console.log("this.state in app: ", this.state);
+        // console.log("this.state in app: ", this.state);
 
         if (!this.state.id) {
             return null;

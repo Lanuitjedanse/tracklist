@@ -4,7 +4,7 @@ import LogoWhite from "./LogoWhite";
 import Logout from "./Logout";
 
 export default function Header(props) {
-    console.log("props: ", props);
+    // console.log("props: ", props);
     return (
         <header>
             <div className="logo-title">

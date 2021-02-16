@@ -268,7 +268,7 @@ textarea:focus {
 .user-search {
     margin: 20px 20px;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     text-decoration: none;
 }
 
@@ -281,6 +281,7 @@ textarea:focus {
 
 .user-search p {
     color: #b088f9;
+    margin-left: 20px;
 }
 
 .search-input::placeholder {
@@ -304,8 +305,9 @@ textarea:focus {
 }
 
 .giphy-user {
-    margin-left: 30px;
+    margin-left: 20px;
 }
+
 /* .border-green {
     border: 5px green solid;
 }

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import FriendshipButton from "./FriendshipButton";
 
 export default class OtherProfile extends Component {
     constructor(props) {
@@ -14,16 +15,26 @@ export default class OtherProfile extends Component {
             error: false,
         };
     }
+    updateFriendShipStatus(status) {
+        this.setState(
+            {
+                friendship: status,
+            },
+            () => {
+                console.log("this.state.friendship: ", this.state.friendship);
+            }
+        );
+    }
 
     componentDidMount() {
         //we want to make an axios request to server to get other user's info
-        console.log("this.props.match: ", this.props.match.params.id);
+        // console.log("this.props.match: ", this.props.match.params.id);
         // take care of situation where user tries to access
         // his own profile and we have to redirect in that case to '/' route to render his own component
         axios
             .get(`/show-users/${this.props.match.params.id}`)
             .then((response) => {
-                console.log("response: ", response);
+                // console.log("response: ", response);
 
                 this.setState({
                     id: response.data.rows.id,
@@ -61,6 +72,12 @@ export default class OtherProfile extends Component {
                     </h3>
 
                     <p className="bio-text">{this.state.bio}</p>
+                    <FriendshipButton
+                        id={this.state.id}
+                        updateFriendShipStatus={(e) => {
+                            this.updateFriendShipStatus(e);
+                        }}
+                    />
                 </div>
             );
         }
