@@ -95,7 +95,8 @@ module.exports.createFriendship = (recipientId, senderId) => {
 };
 
 module.exports.unfriend = (recipientId, senderId) => {
-    const q = `DELETE FROM friendships WHERE (recipient_id = $1 AND sender_id = $2)`;
+    const q = `DELETE FROM friendships WHERE recipient_id = $1 AND sender_id = $2
+    OR sender_id = $1 AND recipient_id = $2`;
     const params = [recipientId, senderId];
     return db.query(q, params);
 };
@@ -103,7 +104,7 @@ module.exports.unfriend = (recipientId, senderId) => {
 module.exports.acceptFriendship = (senderId, recipientId) => {
     const q = `UPDATE friendships
     SET accepted = true
-    WHERE sender_id = $1 AND recipient_id = $2
+    WHERE sender_id = $1 AND recipient_id = $2 OR recipient_id = $1 AND sender_id = $2
     RETURNING accepted`;
     const params = [senderId, recipientId];
     return db.query(q, params);
