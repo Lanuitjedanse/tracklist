@@ -53,7 +53,7 @@ export default class OtherProfile extends Component {
                 <div className="profile-box">
                     <img
                         className="profile-pic"
-                        src={this.state.profilePicUrl}
+                        src={this.state.profilePicUrl || "/avatar.png"}
                         alt={`${this.state.firstName} ${this.state.lastName}`}
                     />
                     <h3>

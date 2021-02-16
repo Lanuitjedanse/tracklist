@@ -66,3 +66,15 @@ module.exports.editBio = (userId, bio) => {
     const params = [userId, bio];
     return db.query(q, params);
 };
+
+module.exports.findMatchingUsers = (val) => {
+    return db.query(
+        `SELECT id, first, last, profile_pic_url FROM USERS WHERE first ILIKE $1 OR last ILIKE $1`,
+        [val + "%"]
+    );
+};
+
+module.exports.getThreeLastUsers = () => {
+    const q = `SELECT id, first, last, profile_pic_url FROM users ORDER BY id DESC LIMIT 3`;
+    return db.query(q);
+};

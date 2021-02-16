@@ -196,8 +196,6 @@ header {
 .app {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 textarea {
@@ -267,6 +265,47 @@ textarea:focus {
     cursor: pointer;
 }
 
+.user-search {
+    margin: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.user-search img {
+    height: 100px;
+    width: 100px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.user-search p {
+    color: #b088f9;
+}
+
+.search-input::placeholder {
+    color: black;
+}
+
+.search-input {
+    min-width: 300px;
+    width: 20%;
+    color: #b088f9;
+    font-size: 1em;
+    padding: 7px 11px;
+    margin: 5px 20px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #b088f9;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.giphy-user {
+    margin-left: 30px;
+}
 /* .border-green {
     border: 5px green solid;
 }

@@ -306,6 +306,46 @@ app.get("/show-users/:id", (req, res) => {
         });
 });
 
+app.get("/users", (req, res) => {
+    db.getThreeLastUsers()
+        .then(({ rows }) => {
+            console.log("here are the last 3 users");
+            console.log("rows: ", rows);
+            res.json({ rows: rows });
+        })
+        .catch((err) => {
+            console.log("there was an error in getting last 3 ", err);
+        });
+});
+
+app.get("/find/:users", (req, res) => {
+    console.log("I am the find users route");
+    const { users } = req.params;
+    db.findMatchingUsers(users)
+        .then(({ rows }) => {
+            // console.log("here are the last 3 users");
+            console.log("rows in find users: ", rows);
+
+            if (rows.length == 0) {
+                res.json({
+                    users: [],
+                    success: false,
+                });
+            } else {
+                res.json({
+                    users: rows,
+                    success: true,
+                });
+            }
+            // rows.sort(function (a, b) {
+            //     return a.first - b.first, a.last - b.last;
+            // });
+        })
+        .catch((err) => {
+            console.log("there was an error in getting last 3 ", err);
+        });
+});
+
 app.get("/logout", (req, res) => {
     req.session = null;
     res.redirect("/welcome");

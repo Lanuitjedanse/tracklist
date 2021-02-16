@@ -6,6 +6,7 @@ import Uploader from "./Uploader";
 import Profile from "./Profile";
 import Header from "./Header";
 import OtherProfile from "./OtherProfile";
+import FindPeople from "./FindPeople";
 import { BrowserRouter, Route } from "react-router-dom";
 
 export default class App extends Component {
@@ -103,6 +104,17 @@ export default class App extends Component {
                                 key={props.match.url}
                                 match={props.match}
                                 history={props.history}
+                            />
+                        )}
+                    />
+                    <Route
+                        path="/find-users"
+                        render={() => (
+                            <FindPeople
+                                id={this.state.id}
+                                firstName={this.state.firstName}
+                                lastName={this.state.lastName}
+                                profilePicUrl={this.state.profilePicUrl}
                             />
                         )}
                     />

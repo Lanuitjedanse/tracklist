@@ -47,12 +47,41 @@ test("Clicking either the Add or Edit button causes a textarea and a Save button
 
 // });
 
+// test("Clicking the Save button causes an ajax request.", async () => {
+//     const { container } = render(<BioEditor />);
+//     const button = container.querySelector("button");
+//     // expect(button.innerHTML).toBe("Save Bio");
+//     fireEvent.click(button);
+
+//     // expect(axios).toHaveBeenCalledWith(button);
+//     // const resp = {data: bio};
+//     axios.post.mockResolvedValue({
+//         data: {
+//             bio: "I just wrote a bio",
+//         },
+//     });
+
+//     // expect(axios).toHaveBeenCalled();
+
+//     //   const bio = { bio: "I just wrote a new bio" };
+//     //   const resp = { data: bio };
+//     // //   axios.post.mockResolvedValue(resp);
+//     // expect(axios).toEqual("I just wrote a bio");
+
+//     await waitFor(() => {
+//         const p = container.querySelector("p");
+//         expect(p).toContain("I just wrote a bio");
+//     });
+// });
+
 test("Clicking the Save button causes an ajax request.", async () => {
     const { container } = render(<BioEditor />);
     const button = container.querySelector("button");
     // expect(button.innerHTML).toBe("Save Bio");
     fireEvent.click(button);
 
+    // expect(axios).toHaveBeenCalledWith(button);
+    // const resp = {data: bio};
     axios.post.mockResolvedValue({
         data: {
             bio: "I just wrote a bio",
