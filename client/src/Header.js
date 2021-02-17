@@ -15,6 +15,7 @@ export default function Header(props) {
             <div className="log-pic-box">
                 <Link to="/find-users">
                     <img src="/magnifier-white.svg" />
+                   
                 </Link>
                 <Logout />
                 <ProfilePic {...props} />
