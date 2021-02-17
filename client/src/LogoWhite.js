@@ -1,5 +1,9 @@
+import { Link } from "react-router-dom";
+
 export default function LogoWhite() {
     return (
-        <img className="logo-header" src="/vinyl-white.svg" alt="vinyl logo" />
+        <Link to="/" className="logo-header">
+            <img src="/vinyl-white.svg" alt="vinyl logo" />
+        </Link>
     );
 }
