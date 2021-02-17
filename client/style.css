@@ -243,8 +243,14 @@ textarea:focus {
 
 .log-pic-box {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
+}
+
+.log-pic-box img {
+    margin-right: 20px;
+    height: 40px;
+    width: 40px;
 }
 
 .logout {
@@ -268,11 +274,20 @@ textarea:focus {
 .user-search {
     margin: 20px 20px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.user-search a {
+    align-self: flex-start;
+    display: flex;
     align-items: center;
     text-decoration: none;
 }
 
 .user-search img {
+    margin: 10px 10px;
     height: 100px;
     width: 100px;
     border-radius: 5px;
@@ -280,18 +295,18 @@ textarea:focus {
 }
 
 .user-search p {
+    margin: 0 20px;
     color: #b088f9;
-    margin-left: 20px;
 }
 
-.search-input::placeholder {
+.user-search input::placeholder {
     color: black;
 }
 
-.search-input {
+.user-search input {
     min-width: 300px;
     width: 20%;
-    color: #b088f9;
+    color: black;
     font-size: 1em;
     padding: 7px 11px;
     margin: 5px 20px;
@@ -300,12 +315,22 @@ textarea:focus {
     border-bottom: 2px solid #b088f9;
 }
 
-.search-input:focus {
+.user-search input {
     outline: none;
 }
 
-.giphy-user {
-    margin-left: 20px;
+.user-search iframe {
+    margin: 20px;
+}
+
+.search-field-box {
+    display: flex;
+    align-self: center;
+}
+
+.search-field-box img {
+    height: 40px;
+    width: 40px;
 }
 
 /* .border-green {

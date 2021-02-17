@@ -45,16 +45,12 @@ export default function FindPeople() {
     // console.log("users: ", users);
 
     return (
-        <div>
-            <h1>Find other people</h1>
+        <div className="user-search">
+            <h3>Our three last signers</h3>
             {lastUsers &&
                 lastUsers.map((user) => {
                     return (
-                        <Link
-                            to={`/user/${user.id}`}
-                            key={user.id}
-                            className="user-search"
-                        >
+                        <Link to={`/user/${user.id}`} key={user.id}>
                             <img
                                 src={user.profile_pic_url || "/avatar.png"}
                                 alt={`${user.first} ${user.last}`}
@@ -64,23 +60,24 @@ export default function FindPeople() {
                     );
                 })}
 
-            <input
-                name="users"
-                type="text"
-                className="search-input"
-                placeholder="find other users"
-                onChange={(e) => setUserInput(e.target.value)}
-                autoComplete="off"
-            />
+            <div className="search-field-box">
+                <img className="magnifier" src="/magnifier-black.svg" />
+                <input
+                    name="users"
+                    type="text"
+                    placeholder="find other users"
+                    onChange={(e) => setUserInput(e.target.value)}
+                    autoComplete="off"
+                />
+            </div>
 
             {errorMessage && <p className="user-search">No one here!</p>}
             {errorMessage && (
                 <iframe
                     src="https://giphy.com/embed/d2lcHJTG5Tscg"
-                    width="480"
-                    height="270"
+                    width="300"
+                    height="150"
                     frameBorder="0"
-                    className="giphy-user"
                     allowFullScreen
                 ></iframe>
             )}
@@ -88,11 +85,7 @@ export default function FindPeople() {
             {userInput &&
                 resultUsers.map((users, index) => {
                     return (
-                        <Link
-                            to={`/user/${users.id}`}
-                            key={index}
-                            className="user-search"
-                        >
+                        <Link to={`/user/${users.id}`} key={index}>
                             <img
                                 src={users.profile_pic_url || "/avatar.png"}
                                 alt={`${users.first} ${users.last}`}
