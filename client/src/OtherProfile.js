@@ -35,6 +35,10 @@ export default class OtherProfile extends Component {
             .get(`/show-users/${this.props.match.params.id}`)
             .then((response) => {
                 // console.log("response: ", response);
+                if (this.props.match.params.id == response.data.cookie) {
+                    return this.props.history.push("/");
+                    //make sure server sends back loggedin user id
+                }
 
                 this.setState({
                     id: response.data.rows.id,
@@ -44,11 +48,6 @@ export default class OtherProfile extends Component {
                     bio: response.data.rows.bio,
                     error: false,
                 });
-
-                if (this.props.match.params.id == response.data.cookie) {
-                    this.props.history.push("/");
-                    //make sure server sends back loggedin user id
-                }
             })
             .catch((err) => {
                 console.log("error in axios api/user: ", err);

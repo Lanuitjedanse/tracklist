@@ -50,30 +50,6 @@ app.get("/welcome", (req, res) => {
     }
 });
 
-// app.post("/registration", (req, res) => {
-//     console.log("I am the post registration route");
-
-//     const { first, last, email, password } = req.body;
-//     if (first && last && email && password) {
-//         hash(password).then((hashedPw) => {
-//             db.insertUserData(first, last, email, hashedPw)
-//                 .then(({ rows }) => {
-//                     // console.log("rows: ", rows);
-//                     req.session.userId = rows[0].id;
-
-//                     res.json({ success: true, data: rows[0] });
-//                 })
-//                 .catch((err) => {
-//                     console.log("error in insert user data", err);
-//                     res.json({ success: false });
-//                 });
-//         });
-//     } else {
-//         console.log("please fill out every field");
-//         res.json({ success: false });
-//     }
-// });
-
 app.post("/registration", async (req, res) => {
     const { first, last, email, password } = req.body;
 
@@ -405,6 +381,7 @@ app.post("/check-friendship/:status", (req, res) => {
 
                 res.json({
                     button: "cancel",
+                    rows: rows,
                 });
             })
             .catch((err) => {
@@ -417,7 +394,7 @@ app.post("/check-friendship/:status", (req, res) => {
             .then(({ rows }) => {
                 console.log("rows: ", rows);
 
-                res.json({ button: "end" });
+                res.json({ button: "end", rows: rows });
             })
             .catch((err) => {
                 console.log("err in accept frienship: ", err);
@@ -427,12 +404,30 @@ app.post("/check-friendship/:status", (req, res) => {
         db.unfriend(requestedUser, loggedInUser)
             .then(({ rows }) => {
                 console.log("rows: ", rows);
-                res.json({ button: "send" });
+                res.json({ button: "send", rows: rows });
             })
             .catch((err) => {
                 console.log("err in accept frienship: ", err);
             });
     }
+});
+
+app.get("/friends-wannabes", (req, res) => {
+    console.log("get wannabes route");
+    console.log("user id: ", req.session.userId);
+
+    const userId = req.session.userId;
+    db.showFriends(userId)
+        .then(({ rows }) => {
+            console.log("getting all friends requests");
+            console.log("rows:", rows);
+
+            res.json({ success: true, rows: rows });
+        })
+        .catch((err) => {
+            console.log("err in showfriends: ", err);
+            res.json({ success: false });
+        });
 });
 
 app.get("/logout", (req, res) => {

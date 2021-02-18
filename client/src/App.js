@@ -8,6 +8,7 @@ import Header from "./Header";
 import OtherProfile from "./OtherProfile";
 import FindPeople from "./FindPeople";
 import { BrowserRouter, Route } from "react-router-dom";
+import Friends from "./Friends";
 
 export default class App extends Component {
     constructor(props) {
@@ -118,10 +119,22 @@ export default class App extends Component {
                             />
                         )}
                     />
+                    <Route path="/show-my-friends" render={() => <Friends />} />
                 </div>
             </BrowserRouter>
         );
     }
 }
 
+//  <Route
+//      path="/show-my-friends"
+//      render={() => (
+//          <Friends
+//              id={this.state.id}
+//              firstName={this.state.firstName}
+//              lastName={this.state.lastName}
+//              profilePicUrl={this.state.profilePicUrl}
+//          />
+//      )}
+//  />;
 // make sure to not name the route and axios the same otherwise you will see json
