@@ -25,7 +25,7 @@ export function reducer(state = {}, action) {
                 if (friend.id === action.id) {
                     return {
                         ...friend,
-                        accepted: false,
+                        accepted: null,
                     };
                 } else {
                     return friend;

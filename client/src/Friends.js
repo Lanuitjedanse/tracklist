@@ -1,5 +1,5 @@
-import React from "react";
-import axios from "./Axios";
+// import React from "react";
+// import axios from "./Axios";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -33,6 +33,7 @@ export default function Friends() {
     return (
         <div className="friends-req-box">
             <h2>Wannabes</h2>
+            {!wannabes && <p>You have no pending requests, LOOOOSER</p>}
             <div className="friends">
                 {wannabes &&
                     wannabes.map((friend) => (
@@ -56,6 +57,7 @@ export default function Friends() {
             </div>
             <h2>Friends</h2>
             <div className="friends">
+                {!friends && <p>You have no friends, LOOOOSER</p>}
                 {friends &&
                     friends.map((friend) => (
                         <div className="real-friends" key={friend.id}>

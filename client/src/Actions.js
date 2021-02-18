@@ -27,28 +27,50 @@ export async function receiveFriendsWannabes() {
 }
 
 export async function acceptFriend(id) {
-    const { data } = await axios.post("/check-friendship/accept", { id });
+    // const { data } = await axios.post("/check-friendship/accept", { id });
 
-    if (data.success) {
-        console.log("data.rows.id: ", data.rows.id);
+    // if (data.success) {
+    //     console.log("data.rows.id: ", data.rows.id);
+    //     return {
+    //         type: "SHOW_FRIENDS",
+    //         id: data.rows.id,
+    //     };
+    // }
+
+    try {
+        const { data } = await axios.post("/check-friendship/accept", { id });
+        console.log("data.rows.id: ", data);
+
         return {
             type: "SHOW_FRIENDS",
-            id: data.rows.id,
+            id: id,
         };
+    } catch (err) {
+        console.log("err accepting friend: ", err);
     }
 }
 
 export async function unfriend(id) {
-    const { data } = await axios.post("/check-friendship/end", { id });
-    console.log(("data: ", data));
-    console.log(("data.id: ", data.id));
+    // const { data } = await axios.post("/check-friendship/end", { id });
+    // console.log(("data: ", data));
+    // console.log(("data.id: ", data.id));
 
-    console.log("data.rows.id: ", data.rows.id);
+    // console.log("data.rows.id: ", data.rows.id);
 
-    if (data.success) {
+    // if (data.success) {
+    //     return {
+    //         type: "END_FRIENDSHIP",
+    //         id: data.rows.id,
+    //     };
+    // }
+    try {
+        const { data } = await axios.post("/check-friendship/end", { id });
+        console.log("data: ", data);
         return {
             type: "END_FRIENDSHIP",
-            id: data.rows.id,
+            id: id,
         };
+    } catch (err) {
+        console.log("err accepting friend: ", err);
     }
 }
