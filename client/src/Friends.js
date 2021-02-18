@@ -33,8 +33,9 @@ export default function Friends() {
     return (
         <div className="friends-req-box">
             <h2>Wannabes</h2>
-            {!wannabes && <p>You have no pending requests, LOOOOSER</p>}
+
             <div className="friends">
+                {wannabes.length === 0 && <p>No pending requests!</p>}
                 {wannabes &&
                     wannabes.map((friend) => (
                         <div className="wannabes" key={friend.id}>
@@ -44,12 +45,20 @@ export default function Friends() {
                             </p>
                             <div>
                                 <button
-                                    className="btn-purple"
+                                    className="btn-purple btn-yes"
                                     onClick={() =>
                                         dispatch(acceptFriend(friend.id))
                                     }
                                 >
                                     Accept
+                                </button>
+                                <button
+                                    className="btn btn-no"
+                                    onClick={() =>
+                                        dispatch(unfriend(friend.id))
+                                    }
+                                >
+                                    Ghost
                                 </button>
                             </div>
                         </div>
@@ -57,7 +66,7 @@ export default function Friends() {
             </div>
             <h2>Friends</h2>
             <div className="friends">
-                {!friends && <p>You have no friends, LOOOOSER</p>}
+                {friends.length === 0 && <p>You have no friends, LOOOOSER!</p>}
                 {friends &&
                     friends.map((friend) => (
                         <div className="real-friends" key={friend.id}>
@@ -67,7 +76,7 @@ export default function Friends() {
                             </p>
                             <div>
                                 <button
-                                    className="btn-purple"
+                                    className="btn btn-no"
                                     onClick={() =>
                                         dispatch(unfriend(friend.id))
                                     }
