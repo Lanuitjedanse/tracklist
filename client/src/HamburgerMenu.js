@@ -1,19 +1,32 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function HamburgerMenu({ toggleBurgerMenu }) {
     // console.log("props.toggleBurgerMenu: ", props.toggleBurgerMenu);
     return (
         <nav>
             <ul className="hamburger-menu">
-                <Link onClick={toggleBurgerMenu} to="/">
+                <NavLink
+                    onClick={toggleBurgerMenu}
+                    exact
+                    to="/"
+                    activeClassName="burger-active"
+                >
                     <li>Home</li>
-                </Link>
-                <Link onClick={toggleBurgerMenu} to="/show-my-friends">
+                </NavLink>
+                <NavLink
+                    onClick={toggleBurgerMenu}
+                    to="/show-my-friends"
+                    activeClassName="burger-active"
+                >
                     <li>Friends</li>
-                </Link>
-                <Link onClick={toggleBurgerMenu} to="/find-users">
+                </NavLink>
+                <NavLink
+                    onClick={toggleBurgerMenu}
+                    to="/find-users"
+                    activeClassName="burger-active"
+                >
                     <li>Find People</li>
-                </Link>
+                </NavLink>
                 <a onClick={toggleBurgerMenu} href="/logout">
                     <li>Logout</li>
                 </a>

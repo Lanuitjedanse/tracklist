@@ -2,6 +2,7 @@ import axios from "axios";
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import FriendshipButton from "./FriendshipButton";
+// import Playlist from "./Playlist";
 
 export default class OtherProfile extends Component {
     constructor(props) {
@@ -35,6 +36,7 @@ export default class OtherProfile extends Component {
             .get(`/show-users/${this.props.match.params.id}`)
             .then((response) => {
                 // console.log("response: ", response);
+                console.log(response.data.playlist);
                 if (this.props.match.params.id == response.data.cookie) {
                     return this.props.history.push("/");
                     //make sure server sends back loggedin user id
@@ -46,6 +48,7 @@ export default class OtherProfile extends Component {
                     lastName: response.data.rows.last,
                     profilePicUrl: response.data.rows.profile_pic_url,
                     bio: response.data.rows.bio,
+                    // playlist: response.data.rows.playlist,
                     error: false,
                 });
             })
@@ -103,3 +106,5 @@ export default class OtherProfile extends Component {
         );
     }
 }
+
+//    <Playlist id={this.state.id} playlist={this.state.playlist} />;

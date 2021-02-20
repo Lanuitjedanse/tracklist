@@ -111,12 +111,28 @@ module.exports.acceptFriendship = (senderId, recipientId) => {
 };
 
 module.exports.showFriends = (userId) => {
-    const q = `SELECT users.id, first, last, profile_pic_url, accepted
+    const q = `SELECT users.id, first, last, profile_pic_url, accepted, sender_id, recipient_id
     FROM friendships
     JOIN users
     ON (accepted = false AND recipient_id = $1 AND sender_id = users.id)
+    OR (accepted = false AND sender_id = $1 AND recipient_id = users.id)
     OR (accepted = true AND recipient_id = $1 AND sender_id = users.id)
     OR (accepted = true AND sender_id = $1 AND recipient_id = users.id)`;
     const params = [userId];
     return db.query(q, params);
 };
+
+// module.exports.addPlaylist = (userId, playlist) => {
+//     const q = `UPDATE users
+//     SET playlist = $2
+//     WHERE id = $1 RETURNING playlist`;
+//     const params = [userId, playlist];
+//     return db.query(q, params);
+// };
+
+// UPDATE users
+//     SET playlist = 'https://open.spotify.com/embed/playlist/51siUNlGNdF4Bp78hKZ8RA'
+//     WHERE id = 1 RETURNING playlist;
+
+// ALTER TABLE users
+// DROP COLUMN playlist;

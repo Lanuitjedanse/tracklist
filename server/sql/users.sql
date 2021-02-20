@@ -8,5 +8,6 @@
       password VARCHAR(255) NOT NULL,
       profile_pic_url VARCHAR DEFAULT NULL,
       bio VARCHAR(255) DEFAULT NULL,
+      playlist VARCHAR(300) DEFAULT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );

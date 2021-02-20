@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Menu() {
     return (
         <>
-            <Link to="/show-my-friends">
+            <NavLink exact to="/" activeClassName="active">
+                <p>Home</p>
+            </NavLink>
+            <NavLink to="/show-my-friends" activeClassName="active">
                 <p>Friends</p>
-            </Link>
-            <Link to="/find-users">
+            </NavLink>
+            <NavLink to="/find-users" activeClassName="active">
                 <p>Find People</p>
-            </Link>
+            </NavLink>
             <a href="/logout">Logout</a>
         </>
     );

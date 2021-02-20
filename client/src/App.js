@@ -10,6 +10,13 @@ import FindPeople from "./FindPeople";
 import { BrowserRouter, Route } from "react-router-dom";
 import Friends from "./Friends";
 
+// import { io } from "socket.io-client";
+
+// const socket = io.connect;
+// socket.on("hello", (data) => {
+//     console.log("data: ", data);
+// });
+
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -33,6 +40,7 @@ export default class App extends Component {
                     lastName: response.data.rows.last,
                     profilePicUrl: response.data.rows.profile_pic_url,
                     bio: response.data.rows.bio,
+                    // playlist: response.data.rows.playlist,
                     id: response.data.rows.id,
                 });
             })
@@ -95,6 +103,7 @@ export default class App extends Component {
                                 profilePicUrl={this.state.profilePicUrl}
                                 bio={this.state.bio}
                                 toggleUploader={this.toggleUploader}
+                                // playlist={this.state.playlist}
                             />
                         )}
                     />
@@ -105,6 +114,9 @@ export default class App extends Component {
                                 key={props.match.url}
                                 match={props.match}
                                 history={props.history}
+                                playlist={props.playlist}
+
+                                // playlist={this.state.playlist}
                             />
                         )}
                     />

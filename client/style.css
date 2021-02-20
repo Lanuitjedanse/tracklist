@@ -12,7 +12,7 @@ main {
 
 header {
     grid-row: 1/2;
-    height: 10vh;
+    height: 80px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -21,7 +21,7 @@ header {
 }
 
 .super-container {
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
 
     justify-content: center;
@@ -150,6 +150,7 @@ header {
 }
 
 .logo-header {
+    cursor: pointer;
     width: 80px;
     padding: 10px;
     margin: 0 5px;
@@ -160,7 +161,7 @@ header {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 90vh;
+    /* height: 90vh; */
 }
 
 .btn-purple {
@@ -241,7 +242,7 @@ textarea:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    /* height: 90vh; */
 }
 
 .log-pic-box {
@@ -349,13 +350,14 @@ textarea:focus {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    min-height: 150px;
+    min-height: 250px;
 }
 
 .wannabes,
 .real-friends {
     /* margin: 20px; */
     /* background-color: hotpink; */
+    /* width: 100%; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -367,7 +369,7 @@ textarea:focus {
     margin: 10px 10px;
     height: 150px;
     width: 150px;
-    border-radius: 5px;
+    border-radius: 15px;
     object-fit: cover;
 }
 
@@ -376,7 +378,8 @@ textarea:focus {
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
-    height: 90vh;
+    /* height: 90vh; */
+    /* height: 100%; */
 }
 
 .btn-yes {
@@ -411,13 +414,46 @@ textarea:focus {
     align-items: center;
     justify-content: space-evenly;
 
-    background-color: #ffe4e4;
+    background-color: #ffc3e7;
 }
 
 .hamburger-menu a {
     color: black;
     text-decoration: none;
     list-style: none;
+    font-weight: bold;
+}
+
+.playlist {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #11110c;
+}
+
+.active > p {
+    color: #ffc3e7;
+    /* font-weight: bold; */
+    /* text-decoration: underline; */
+}
+
+.burger-active > li {
+    color: white;
+    /* font-weight: bold; */
+    /* text-decoration: underline; */
+}
+
+@media screen and (min-width: 350px) and (max-width: 900px) {
+    .friends {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .friends-req-box {
+        height: 100%;
+    }
 }
 
 /* .border-green {

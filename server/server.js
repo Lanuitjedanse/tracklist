@@ -12,6 +12,13 @@ const s3 = require("./s3");
 const config = require("../config");
 const { uploader } = require("./upload");
 
+// socket io
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    allowRequest: (req, callback) =>
+        callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+});
+
 let cookie_sec;
 
 if (process.env.sessionSecret) {
@@ -421,14 +428,31 @@ app.get("/friends-wannabes", (req, res) => {
         .then(({ rows }) => {
             console.log("getting all friends requests");
             console.log("rows:", rows);
+            // console.log("sender_id: ", rows.sender_id);
+            // console.log("recipient_id: ", rows.recipient_id);
 
-            res.json({ success: true, rows: rows });
+            res.json({ success: true, rows: rows, userId: req.session.userId });
         })
         .catch((err) => {
             console.log("err in showfriends: ", err);
             res.json({ success: false });
         });
 });
+
+// app.post("/playlist", (req, res) => {
+//     console.log("I am the playlist route");
+//     const { playlist } = req.body;
+
+//     db.addPlaylist(req.session.userId)
+//         .then(({ rows }) => {
+//             console.log("playlist retrieved from DB");
+//             console.log("rows: ", rows);
+//             res.json({ success: true, rows: rows });
+//         })
+//         .catch((err) => {
+//             console.log("err in retrieving playlist from DB: ", err);
+//         });
+// });
 
 app.get("/logout", (req, res) => {
     req.session = null;
@@ -447,6 +471,20 @@ app.get("*", (req, res) => {
     }
 });
 
-app.listen(process.env.PORT || 3001, function () {
+// to handle both requests - socket and get, use etc.
+server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
+});
+
+io.on("connection", (socket) => {
+    // all code related to socket has to go here
+    console.log(`socket with id: ${socket.id} has connected`);
+
+    socket.emit("hello", {
+        cohort: "Adobo",
+    });
+
+    socket.on("disconnect: ", () => {
+        console.log(`socket with id: ${socket.id} just disconnected`);
+    });
 });

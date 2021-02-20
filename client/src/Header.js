@@ -4,8 +4,9 @@ import LogoWhite from "./LogoWhite";
 import ProfilePic from "./ProfilePic";
 import HamburgerMenu from "./HamburgerMenu";
 import { useState, useEffect } from "react";
+import Playlist from "./Playlist";
 
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export default function Header(props) {
     const [mQuery, setMQuery] = useState();
@@ -34,6 +35,13 @@ export default function Header(props) {
         setBurgerOpen(!burgerOpen);
     };
 
+    const [playlistOpen, setPlaylistOpen] = useState(false);
+
+    const togglePlaylist = () => {
+        console.log("burger open");
+        setPlaylistOpen(!playlistOpen);
+    };
+
     let src;
 
     burgerOpen ? (src = "/x-btn.svg") : (src = "/hamburger-menu.svg");
@@ -42,7 +50,7 @@ export default function Header(props) {
         <>
             <header>
                 <div className="logo-title">
-                    <LogoWhite />
+                    <LogoWhite togglePlaylist={togglePlaylist} />
                     <h2 className="brand-header">Tracklist</h2>
                 </div>
                 <div className="log-pic-box">
@@ -55,12 +63,15 @@ export default function Header(props) {
                     ) : (
                         <Menu />
                     )}
+
                     <ProfilePic {...props} />
                 </div>
             </header>
             {burgerOpen && (
                 <HamburgerMenu toggleBurgerMenu={toggleBurgerMenu} />
             )}
+
+            {playlistOpen && <Playlist togglePlaylist={togglePlaylist} />}
         </>
     );
 }

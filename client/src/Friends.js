@@ -14,7 +14,10 @@ export default function Friends() {
     const wannabes = useSelector(
         (state) =>
             state.users &&
-            state.users.filter((friend) => friend.accepted == false)
+            state.users.filter(
+                (friend) =>
+                    friend.accepted == false && friend.sender_id == friend.id
+            )
     );
 
     const friends = useSelector(
@@ -22,11 +25,20 @@ export default function Friends() {
             state.users && state.users.filter((friend) => friend.accepted)
     );
 
+    const pendingFriends = useSelector(
+        (state) =>
+            state.users &&
+            state.users.filter(
+                (friend) =>
+                    friend.accepted == false && friend.recipient_id == friend.id
+            )
+    );
+
     useEffect(() => {
         dispatch(receiveFriendsWannabes());
     }, []);
 
-    if (!friends || !wannabes) {
+    if (!friends || !wannabes || !pendingFriends) {
         return null;
     }
 
@@ -39,7 +51,9 @@ export default function Friends() {
                 {wannabes &&
                     wannabes.map((friend) => (
                         <div className="wannabes" key={friend.id}>
-                            <img src={friend.profile_pic_url} />
+                            <img
+                                src={friend.profile_pic_url || "/avatar.png"}
+                            />
                             <p>
                                 {friend.first} {friend.last}
                             </p>
@@ -70,7 +84,9 @@ export default function Friends() {
                 {friends &&
                     friends.map((friend) => (
                         <div className="real-friends" key={friend.id}>
-                            <img src={friend.profile_pic_url} />
+                            <img
+                                src={friend.profile_pic_url || "/avatar.png"}
+                            />
                             <p>
                                 {friend.first} {friend.last}
                             </p>
@@ -82,6 +98,31 @@ export default function Friends() {
                                     }
                                 >
                                     Unfriend
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+            </div>
+            <h2>My pending requests</h2>
+            <div className="friends">
+                {pendingFriends.length === 0 && <p>No pending requests!</p>}
+                {pendingFriends &&
+                    pendingFriends.map((friend) => (
+                        <div className="wannabes" key={friend.id}>
+                            <img
+                                src={friend.profile_pic_url || "/avatar.png"}
+                            />
+                            <p>
+                                {friend.first} {friend.last}
+                            </p>
+                            <div>
+                                <button
+                                    className="btn btn-no"
+                                    onClick={() =>
+                                        dispatch(unfriend(friend.id))
+                                    }
+                                >
+                                    Cancel
                                 </button>
                             </div>
                         </div>

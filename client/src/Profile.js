@@ -1,9 +1,10 @@
 import ProfilePic from "./ProfilePic";
 import BioEditor from "./BioEditor";
+// import Playlist from "./Playlist";
 
 export default function Profile(props) {
     console.log("props in profile: ", props);
-    console.log(props.toggleUploader);
+    // console.log("playlist: ", props.playlist);
     return (
         <div className="profile-box border-pink">
             <div className="profile-pic-box">
@@ -27,5 +28,8 @@ export default function Profile(props) {
         </div>
     );
 }
-
+// <Playlist />;
 // need to add bio in bioeditor component
+{
+    /* <Playlist playlist={props.playlist} />; */
+}

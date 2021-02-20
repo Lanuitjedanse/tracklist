@@ -1,17 +1,4 @@
-// this will contain all of our actions
-// an actions creator is a function that returns an object
-
 import axios from "./Axios";
-
-// export async function myFirstActionCreator() {
-//     // we can optionally talk to the server here..
-
-//     const { data } = await axios.get("/someroute");
-//     return {
-//         type: "UPDATE_STATE_SOMEHOW",
-//         data: data.userId,
-//     };
-// }
 
 export async function receiveFriendsWannabes() {
     const { data } = await axios.get(`/friends-wannabes`);
@@ -22,21 +9,12 @@ export async function receiveFriendsWannabes() {
         return {
             type: "SHOW_WANNABES",
             friendsList: data.rows,
+            userId: data.userId,
         };
     }
 }
 
 export async function acceptFriend(id) {
-    // const { data } = await axios.post("/check-friendship/accept", { id });
-
-    // if (data.success) {
-    //     console.log("data.rows.id: ", data.rows.id);
-    //     return {
-    //         type: "SHOW_FRIENDS",
-    //         id: data.rows.id,
-    //     };
-    // }
-
     try {
         const { data } = await axios.post("/check-friendship/accept", { id });
         console.log("data.rows.id: ", data);
@@ -51,18 +29,6 @@ export async function acceptFriend(id) {
 }
 
 export async function unfriend(id) {
-    // const { data } = await axios.post("/check-friendship/end", { id });
-    // console.log(("data: ", data));
-    // console.log(("data.id: ", data.id));
-
-    // console.log("data.rows.id: ", data.rows.id);
-
-    // if (data.success) {
-    //     return {
-    //         type: "END_FRIENDSHIP",
-    //         id: data.rows.id,
-    //     };
-    // }
     try {
         const { data } = await axios.post("/check-friendship/end", { id });
         console.log("data: ", data);
@@ -74,3 +40,21 @@ export async function unfriend(id) {
         console.log("err accepting friend: ", err);
     }
 }
+
+// export async function pendingFriends(id) {
+//     try {
+//         const { data } = await axios.post("/check-friendship/end", { id });
+//         console.log(("pending data: ", data));
+//         console.log("acceptFriend data.rows.id", data.rows);
+//         console.log("data.rows : ", data.rows[0].sender_id);
+
+//         if (data.rows[0].sender_id === id) {
+//             return {
+//                 type: "SHOW_PENDING",
+//                 id: id,
+//             };
+//         }
+//     } catch (err) {
+//         console.log("err pending friend: ", err);
+//     }
+// }
