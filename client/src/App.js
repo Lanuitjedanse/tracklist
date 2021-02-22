@@ -63,7 +63,7 @@ export default class App extends Component {
         });
     }
 
-    setDeletePic(profilePicUrl) {
+    deletePic(profilePicUrl) {
         this.setState({
             profilePicUrl: profilePicUrl,
         });
@@ -110,8 +110,8 @@ export default class App extends Component {
                                 profilePicUrl={this.state.profilePicUrl}
                                 bio={this.state.bio}
                                 toggleUploader={this.toggleUploader}
-                                setDeletePic={(profilePicUrl) =>
-                                    this.setDeletePic(profilePicUrl)
+                                deletePic={(profilePicUrl) =>
+                                    this.deletePic(profilePicUrl)
                                 }
                                 // playlist={this.state.playlist}
                             />
@@ -124,7 +124,7 @@ export default class App extends Component {
                                 key={props.match.url}
                                 match={props.match}
                                 history={props.history}
-                                playlist={props.playlist}
+                                // playlist={props.playlist}
 
                                 // playlist={this.state.playlist}
                             />

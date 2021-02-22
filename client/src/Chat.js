@@ -7,7 +7,7 @@ import { socket } from "./Socket";
 
 export default function Chat() {
     // const [message, setMessage] = useState();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const textRef = useRef("");
     const scrollRef = useRef();
 

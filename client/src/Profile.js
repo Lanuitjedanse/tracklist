@@ -24,7 +24,7 @@ export default function Profile(props) {
                     />
                     <DeleteProfilePic
                         profilePicUrl={props.profilePicUrl}
-                        onClick={props.deletePic}
+                        deletePic={props.deletePic}
                         id={props.id}
                     />
                 </div>

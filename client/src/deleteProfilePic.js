@@ -1,19 +1,17 @@
-import { useState, useEffect } from "react";
+// import { useState } from "react";
 import axios from "./Axios";
 
 export default function DeleteProfilePic(props) {
-    const [profilePic, setProfilePic] = useState();
-    console.log("props: ", props);
+    // console.log("props: ", props);
 
-    const deletePic = (e) => {
-        e.preventDefault();
-        // console.log("viewee: ", viewee);
+    const submit = () => {
+        console.log("deletePic", props.deletePic);
 
         axios
-            .post(`/delete-profile-pic`, profilePic)
+            .post(`/delete-profile-pic`)
             .then(({ data }) => {
-                console.log("data: ", data.rows[0].profile_pic_url);
-                setProfilePic(data.rows[0].profile_pic_url);
+                // console.log("data: ", data.rows[0].profile_pic_url);
+                props.deletePic(data.rows[0].profile_pic_url);
             })
             .catch((err) => {
                 console.log("err in axios get users: ", err);
@@ -22,7 +20,11 @@ export default function DeleteProfilePic(props) {
 
     return (
         <div>
-            <img onClick={deletePic} src="/delete.svg" className="delete" />
+            <img
+                onClick={() => submit()}
+                src="/delete.svg"
+                className="delete"
+            />
         </div>
     );
 }
