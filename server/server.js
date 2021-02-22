@@ -29,15 +29,20 @@ if (process.env.sessionSecret) {
 }
 
 app.use(compression());
+
+const cookieSessionMiddleware = cookieSession({
+    secret: cookie_sec,
+    maxAge: 1000 * 60 * 60 * 24 * 90,
+});
+
+app.use(cookieSessionMiddleware);
+io.use(function (socket, next) {
+    // console.log("socket.request.url: ", socket.request.url);
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
+
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 app.use(express.json());
-
-app.use(
-    cookieSession({
-        maxAge: 1000 * 60 * 60 * 24 * 14,
-        secret: cookie_sec,
-    })
-); // equals to 2 weeks
 
 app.use(csurf());
 
@@ -439,6 +444,21 @@ app.get("/friends-wannabes", (req, res) => {
         });
 });
 
+app.post("/delete-profile-pic", (req, res) => {
+    console.log("I am delete post pic");
+
+    db.deleteProfilePic(req.session.userId)
+        .then(({ rows }) => {
+            console.log("rows: ", rows);
+            res.json({ success: true, rows: rows });
+        })
+        .catch((err) => {
+            console.log(
+                "there was an error with delete profile pic post: ",
+                err
+            );
+        });
+});
 // app.post("/playlist", (req, res) => {
 //     console.log("I am the playlist route");
 //     const { playlist } = req.body;
@@ -476,15 +496,60 @@ server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
 });
 
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
+    const { userId } = socket.request.session;
+    // const { chat } = req.body;
     // all code related to socket has to go here
-    console.log(`socket with id: ${socket.id} has connected`);
+    // console.log(`socket with id: ${socket.id} has connected`);
 
-    socket.emit("hello", {
-        cohort: "Adobo",
+    // socket.emit("hello", {
+    //     cohort: "Adobo",
+    // });
+
+    // socket.on("disconnect: ", () => {
+    //     console.log(`socket with id: ${socket.id} just disconnected`);
+    // });
+
+    if (!userId) {
+        return socket.disonnect(true);
+    }
+
+    socket.on("chatMessage", async (text) => {
+        try {
+            console.log("text: ", text);
+            await db.addMessage(userId, text);
+            const newMessage = await db.showLastMessage();
+            io.emit("newMessage", newMessage.rows[0]);
+        } catch (err) {
+            console.log("err in chatMessage", err);
+        }
+
+        // need to make a db query to retrieve info by userId
     });
 
-    socket.on("disconnect: ", () => {
-        console.log(`socket with id: ${socket.id} just disconnected`);
-    });
+    // socket.on("chatMessage", (text) => {
+    //     db.addMessage(userId, text)
+    //         .then(() => {
+    //             db.showLastMessage().then(({ rows }) => {
+    //                 console.log("rows in show last message: ", rows[0]);
+    //                 io.emit("newMessage", rows[0]);
+    //             });
+    //         })
+    //         .catch((err) => {
+    //             console.log("there was an error in addMessage: ", err);
+    //         });
+    // });
+
+    // socket.on("chatMessages", async (messages) => {
+
+    try {
+        const messages = await db.showMessages();
+
+        io.emit("chatMessages", messages.rows.reverse());
+    } catch (err) {
+        console.log("err in chatMessage", err);
+    }
+
+    // need to make a db query to retrieve info by userId
+    // });
 });

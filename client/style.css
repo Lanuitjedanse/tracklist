@@ -421,7 +421,6 @@ textarea:focus {
     color: black;
     text-decoration: none;
     list-style: none;
-    font-weight: bold;
 }
 
 .playlist {
@@ -441,6 +440,87 @@ textarea:focus {
     color: white;
     /* font-weight: bold; */
     /* text-decoration: underline; */
+}
+
+.spinner {
+    -webkit-animation: rotate-center 0.6s ease-in-out infinite both;
+    animation: rotate-center 0.6s ease-in-out infinite both;
+}
+
+.spinner img {
+    height: 30px;
+    width: 30px;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.delete {
+    height: 25px;
+    margin-top: -29px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.icon-box {
+    display: flex;
+}
+
+.previous-messages {
+    height: 500px;
+    width: 60%;
+    /* border: 1px solid black; */
+    border-radius: 10px;
+    overflow-y: scroll;
+    background-color: #9870fc42;
+}
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat textarea {
+    width: 60%;
+}
+
+.chat-pic {
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;
+}
+
+.user-chat-box {
+    display: flex;
+    align-items: center;
+}
+
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
 
 @media screen and (min-width: 350px) and (max-width: 900px) {

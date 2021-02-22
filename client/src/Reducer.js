@@ -33,6 +33,25 @@ export function reducer(state = {}, action) {
             }),
         };
     }
+
+    if (action.type === "SHOW_MESSAGES") {
+        state = {
+            ...state,
+            messages: action.messages,
+        };
+    }
+    if (action.type === "SEND_MESSAGE") {
+        state = {
+            ...state,
+            text: action.text,
+        };
+    }
+    if (action.type === "SHOW_NEW_MESSAGE") {
+        state = {
+            ...state,
+            messages: [...state.messages, action.newMessage],
+        };
+    }
     return state;
 }
 

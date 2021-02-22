@@ -9,6 +9,7 @@ import OtherProfile from "./OtherProfile";
 import FindPeople from "./FindPeople";
 import { BrowserRouter, Route } from "react-router-dom";
 import Friends from "./Friends";
+import Chat from "./Chat";
 
 // import { io } from "socket.io-client";
 
@@ -62,16 +63,22 @@ export default class App extends Component {
         });
     }
 
+    setDeletePic(profilePicUrl) {
+        this.setState({
+            profilePicUrl: profilePicUrl,
+        });
+    }
+
     render() {
         // console.log("this.state in app: ", this.state);
 
         if (!this.state.id) {
-            return null;
-            // return (
-            //     <div className="spinner-container">
-            //         <p>spinner container</p>
-            //     </div>
-            // );
+            // return null;
+            return (
+                <div className="spinner-container">
+                    <img src="/loading.svg" className="spinner" />
+                </div>
+            );
         }
         return (
             <BrowserRouter>
@@ -103,6 +110,9 @@ export default class App extends Component {
                                 profilePicUrl={this.state.profilePicUrl}
                                 bio={this.state.bio}
                                 toggleUploader={this.toggleUploader}
+                                setDeletePic={(profilePicUrl) =>
+                                    this.setDeletePic(profilePicUrl)
+                                }
                                 // playlist={this.state.playlist}
                             />
                         )}
@@ -132,6 +142,7 @@ export default class App extends Component {
                         )}
                     />
                     <Route path="/show-my-friends" render={() => <Friends />} />
+                    <Route path="/chat" component={Chat} />
                 </div>
             </BrowserRouter>
         );

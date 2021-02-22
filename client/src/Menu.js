@@ -7,6 +7,9 @@ export default function Menu() {
             <NavLink exact to="/" activeClassName="active">
                 <p>Home</p>
             </NavLink>
+            <NavLink to="/chat" activeClassName="active">
+                <p>Chat</p>
+            </NavLink>
             <NavLink to="/show-my-friends" activeClassName="active">
                 <p>Friends</p>
             </NavLink>

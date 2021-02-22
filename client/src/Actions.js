@@ -41,6 +41,34 @@ export async function unfriend(id) {
     }
 }
 
+export function chatMessage(text) {
+    // socket.emit("chatMessage", text);
+
+    return {
+        type: "SEND_MESSAGE",
+        text,
+    };
+}
+
+export function chatMessages(messages) {
+    // socket.emit("chatMessages", messages);
+    console.log("messages: ", messages);
+
+    return {
+        type: "SHOW_MESSAGES",
+        messages,
+    };
+}
+
+export function showNewMessage(newMessage) {
+    console.log("messages: ", newMessage);
+
+    return {
+        type: "SHOW_NEW_MESSAGE",
+        newMessage,
+    };
+}
+
 // export async function pendingFriends(id) {
 //     try {
 //         const { data } = await axios.post("/check-friendship/end", { id });

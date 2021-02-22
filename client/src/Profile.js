@@ -1,9 +1,11 @@
 import ProfilePic from "./ProfilePic";
 import BioEditor from "./BioEditor";
-// import Playlist from "./Playlist";
+import DeleteProfilePic from "./deleteProfilePic";
 
 export default function Profile(props) {
     console.log("props in profile: ", props);
+    console.log("deletepic: ", props.deletePic);
+
     // console.log("playlist: ", props.playlist);
     return (
         <div className="profile-box border-pink">
@@ -14,11 +16,18 @@ export default function Profile(props) {
                     profilePicUrl={props.profilePicUrl}
                     className="profile-pic"
                 />
-                <img
-                    className="camera-icon"
-                    src="/camera.svg"
-                    onClick={props.toggleUploader}
-                />
+                <div className="icon-box">
+                    <img
+                        className="camera-icon"
+                        src="/camera.svg"
+                        onClick={props.toggleUploader}
+                    />
+                    <DeleteProfilePic
+                        profilePicUrl={props.profilePicUrl}
+                        onClick={props.deletePic}
+                        id={props.id}
+                    />
+                </div>
             </div>
 
             <h3>

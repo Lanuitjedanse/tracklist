@@ -14,6 +14,13 @@ export default function HamburgerMenu({ toggleBurgerMenu }) {
                     <li>Home</li>
                 </NavLink>
                 <NavLink
+                    to="/chat"
+                    activeClassName="burger-active"
+                    onClick={toggleBurgerMenu}
+                >
+                    <li>Chat</li>
+                </NavLink>
+                <NavLink
                     onClick={toggleBurgerMenu}
                     to="/show-my-friends"
                     activeClassName="burger-active"

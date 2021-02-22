@@ -1,3 +1,4 @@
+const { queryByDisplayValue } = require("@testing-library/react");
 const spicedPg = require("spiced-pg");
 
 let db;
@@ -120,6 +121,41 @@ module.exports.showFriends = (userId) => {
     OR (accepted = true AND sender_id = $1 AND recipient_id = users.id)`;
     const params = [userId];
     return db.query(q, params);
+};
+
+module.exports.deleteProfilePic = (userId) => {
+    const q = `UPDATE users
+    SET profile_pic_url = null
+    WHERE id = $1 returning profile_pic_url, id`;
+    const params = [userId];
+    return db.query(q, params);
+};
+
+module.exports.addMessage = (senderId, message) => {
+    const q = `INSERT INTO chat (sender_id, message) 
+    VALUES ($1, $2) RETURNING *`;
+    const params = [senderId, message];
+    return db.query(q, params);
+};
+
+module.exports.showMessages = () => {
+    const q = `SELECT chat.sender_id, chat.message, chat.created_at, users.first, users.last, users.profile_pic_url, chat.id 
+    FROM chat
+    JOIN users
+    ON sender_id = users.id
+    ORDER BY chat.id DESC LIMIT 10`;
+
+    return db.query(q);
+};
+
+module.exports.showLastMessage = () => {
+    const q = `SELECT chat.sender_id, chat.message, chat.created_at, users.first, users.last, users.profile_pic_url, chat.id 
+    FROM chat
+    JOIN users
+    ON sender_id = users.id
+    ORDER BY chat.id DESC LIMIT 1`;
+
+    return db.query(q);
 };
 
 // module.exports.addPlaylist = (userId, playlist) => {
