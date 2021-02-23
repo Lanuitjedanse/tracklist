@@ -75,7 +75,8 @@ export default class App extends Component {
         if (!this.state.id) {
             // return null;
             return (
-                <div className="spinner-container">
+                <div className="spinner-page">
+                    <div className="spinner-container"></div>
                     <img src="/loading.svg" className="spinner" />
                 </div>
             );
@@ -142,7 +143,10 @@ export default class App extends Component {
                         )}
                     />
                     <Route path="/show-my-friends" render={() => <Friends />} />
-                    <Route path="/chat" component={Chat} />
+                    <Route
+                        path="/chat"
+                        render={() => <Chat id={this.state.id} />}
+                    />
                 </div>
             </BrowserRouter>
         );

@@ -61,7 +61,10 @@ export function chatMessages(messages) {
 }
 
 export function showNewMessage(newMessage) {
-    console.log("messages: ", newMessage);
+    // console.log("messages: ", newMessage);
+    console.log("newMessage: ", newMessage);
+    console.log("newMessage: ", newMessage.cookie);
+    console.log("newMessage.newmessage: ", newMessage.newMessage);
 
     return {
         type: "SHOW_NEW_MESSAGE",

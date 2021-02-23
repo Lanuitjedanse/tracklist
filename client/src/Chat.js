@@ -5,13 +5,14 @@ import axios from "./Axios";
 import { chatMessage, chatMessages } from "./Actions";
 import { socket } from "./Socket";
 
-export default function Chat() {
+export default function Chat(props) {
     // const [message, setMessage] = useState();
     // const dispatch = useDispatch();
     const textRef = useRef("");
     const scrollRef = useRef();
 
     const allMessages = useSelector((state) => state.messages);
+    // const cookie = useSelector((state) => state.cookie);
 
     const scrollToBottom = () => {
         scrollRef.current.scrollTop =
@@ -28,28 +29,26 @@ export default function Chat() {
     };
 
     const enterMessage = (e) => {
-        e.keyCode === 13 && sendMessage();
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            sendMessage();
+        }
     };
 
     const sendMessage = () => {
         console.log("I was clicked");
         console.log("current text input ", textRef.current.value);
-        socket.emit("chatMessage", textRef.current.value);
+        console.log("current text input ", textRef.current.value.length);
+
+        if (textRef.current.value != 0) {
+            socket.emit("chatMessage", textRef.current.value);
+            textRef.current.value = "";
+        }
+
         // dispatch(sendMessage(textRef.current.value));
 
-        textRef.current.value = "";
         // scrollToBottom();
     };
-
-    //    handleChange(e) {
-    //     // console.log("e.target.value", e.target.value);
-    //     // console.log("e.target.name: ", e.target.name);
-    //     this.setState({
-    //         [e.target.name]: e.target.value,
-    //     });
-    //     // console.log(this.state);
-    //     // () => console.log("this.state after setstate: ", this.state);
-    // },
 
     return (
         <div className="chat">
@@ -57,7 +56,14 @@ export default function Chat() {
             <div className="previous-messages" ref={scrollRef}>
                 {allMessages &&
                     allMessages.map((msg) => (
-                        <div key={msg.id}>
+                        <div
+                            className={
+                                props.id === msg.sender_id
+                                    ? "chat-msg-box-purple"
+                                    : "chat-msg-box-pink"
+                            }
+                            key={msg.id}
+                        >
                             <div className="user-chat-box">
                                 <img
                                     className="chat-pic"

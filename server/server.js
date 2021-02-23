@@ -527,21 +527,6 @@ io.on("connection", async (socket) => {
         // need to make a db query to retrieve info by userId
     });
 
-    // socket.on("chatMessage", (text) => {
-    //     db.addMessage(userId, text)
-    //         .then(() => {
-    //             db.showLastMessage().then(({ rows }) => {
-    //                 console.log("rows in show last message: ", rows[0]);
-    //                 io.emit("newMessage", rows[0]);
-    //             });
-    //         })
-    //         .catch((err) => {
-    //             console.log("there was an error in addMessage: ", err);
-    //         });
-    // });
-
-    // socket.on("chatMessages", async (messages) => {
-
     try {
         const messages = await db.showMessages();
 

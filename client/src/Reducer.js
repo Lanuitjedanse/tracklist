@@ -38,6 +38,7 @@ export function reducer(state = {}, action) {
         state = {
             ...state,
             messages: action.messages,
+            cookie: action.cookie,
         };
     }
     if (action.type === "SEND_MESSAGE") {

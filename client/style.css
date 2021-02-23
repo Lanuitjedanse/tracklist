@@ -378,10 +378,13 @@ textarea:focus {
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
+
     /* height: 90vh; */
     /* height: 100%; */
 }
-
+.friends-req-box h2 {
+    margin: 20px;
+}
 .btn-yes {
     min-width: 60px;
     margin-right: 5px;
@@ -409,25 +412,36 @@ textarea:focus {
     height: 30px;
 }
 .hamburger-menu {
-    height: 50px;
+    height: 300px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: space-evenly;
 
-    background-color: #ffc3e7;
+    background-color: #b088f970;
 }
 
 .hamburger-menu a {
     color: black;
     text-decoration: none;
     list-style: none;
+    display: flex;
+}
+
+.hamburger-menu li {
+    margin-left: 10px;
+}
+
+.menu-icon {
+    height: 30px;
+    width: 30px;
 }
 
 .playlist {
     display: flex;
     justify-content: center;
     width: 100%;
-    background-color: #11110c;
+    background-color: black;
 }
 
 .active > p {
@@ -438,6 +452,8 @@ textarea:focus {
 
 .burger-active > li {
     color: white;
+    font-weight: bold;
+
     /* font-weight: bold; */
     /* text-decoration: underline; */
 }
@@ -447,12 +463,12 @@ textarea:focus {
     animation: rotate-center 0.6s ease-in-out infinite both;
 }
 
-.spinner img {
-    height: 30px;
-    width: 30px;
+.spinner {
+    height: 80px;
+    width: 80px;
 }
 
-.spinner-container {
+.spinner-page {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -477,7 +493,7 @@ textarea:focus {
     /* border: 1px solid black; */
     border-radius: 10px;
     overflow-y: scroll;
-    background-color: #9870fc42;
+    /* background-color: #9870fc42; */
 }
 
 .chat {
@@ -487,19 +503,42 @@ textarea:focus {
     align-items: center;
 }
 
+.chat h2 {
+    margin: 30px;
+}
+
 .chat textarea {
-    width: 60%;
+    margin-top: 30px;
+    width: 40%;
+
+    border-radius: 8px;
 }
 
 .chat-pic {
     height: 50px;
     width: 50px;
-    border-radius: 5px;
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 5px;
 }
 
 .user-chat-box {
     display: flex;
     align-items: center;
+}
+
+.chat-msg-box-purple {
+    padding: 5px;
+    background-color: #ffe0f7;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.chat-msg-box-pink {
+    padding: 5px;
+    background-color: #bbf1fa;
+    margin: 10px;
+    border-radius: 10px;
 }
 
 @-webkit-keyframes spinner {
