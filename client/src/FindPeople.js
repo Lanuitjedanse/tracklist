@@ -52,7 +52,7 @@ export default function FindPeople() {
                     return (
                         <Link to={`/user/${user.id}`} key={user.id}>
                             <img
-                                src={user.profile_pic_url || "/avatar.png"}
+                                src={user.profile_pic_url || "/avatar.jpg"}
                                 alt={`${user.first} ${user.last}`}
                             />
                             <p>{`${user.first} ${user.last}`}</p>
@@ -87,7 +87,7 @@ export default function FindPeople() {
                     return (
                         <Link to={`/user/${users.id}`} key={index}>
                             <img
-                                src={users.profile_pic_url || "/avatar.png"}
+                                src={users.profile_pic_url || "/avatar.jpg"}
                                 alt={`${users.first} ${users.last}`}
                             />
                             <p>{`${users.first} ${users.last}`}</p>

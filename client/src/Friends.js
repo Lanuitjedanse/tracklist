@@ -56,7 +56,7 @@ export default function Friends() {
                             key={friend.id}
                         >
                             <img
-                                src={friend.profile_pic_url || "/avatar.png"}
+                                src={friend.profile_pic_url || "/avatar.jpg"}
                             />
                             <p>
                                 {friend.first} {friend.last}
@@ -93,7 +93,7 @@ export default function Friends() {
                             key={friend.id}
                         >
                             <img
-                                src={friend.profile_pic_url || "/avatar.png"}
+                                src={friend.profile_pic_url || "/avatar.jpg"}
                             />
                             <p>
                                 {friend.first} {friend.last}
@@ -122,7 +122,7 @@ export default function Friends() {
                             key={friend.id}
                         >
                             <img
-                                src={friend.profile_pic_url || "/avatar.png"}
+                                src={friend.profile_pic_url || "/avatar.jpg"}
                             />
                             <p>
                                 {friend.first} {friend.last}

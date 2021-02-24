@@ -54,17 +54,18 @@ export default function OtherProfile(props) {
             .then((response) => {
                 const userId = response.data.userId;
 
-                let notMe = response.data.rows.filter(
-                    (friend) =>
-                        friend.recipient_id != userId &&
-                        friend.sender_id != userId
-                );
-
-                let me = response.data.rows.find(
-                    (friend) =>
-                        friend.recipient_id == userId ||
-                        friend.sender_id == userId
-                );
+                const me = response.data.rows.find((friend) => {
+                    return (
+                        friend.sender_id == userId ||
+                        friend.recipient_id == userId
+                    );
+                });
+                const notMe = response.data.rows.find((friend) => {
+                    return (
+                        friend.sender_id != userId &&
+                        friend.recipient_id != userId
+                    );
+                });
 
                 setUserMe(me);
                 setOtherFriends(notMe);
@@ -86,7 +87,7 @@ export default function OtherProfile(props) {
                     <div className="profile-btn-img">
                         <img
                             className="profile-pic"
-                            src={profilePicUrl || "/avatar.png"}
+                            src={profilePicUrl || "/avatar.jpg"}
                             alt={`${firstName} ${lastName}`}
                         />
                         <h3>
@@ -105,10 +106,10 @@ export default function OtherProfile(props) {
                     {userMe && (
                         <div className="us-box">
                             <div className="us-pic">
-                                <img src={profilePicUrl || "/avatar.png"} />
+                                <img src={profilePicUrl || "/avatar.jpg"} />
                                 <img
                                     src={
-                                        userMe.profile_pic_url || "/avatar.png"
+                                        userMe.profile_pic_url || "/avatar.jpg"
                                     }
                                 />
                             </div>
@@ -132,7 +133,7 @@ export default function OtherProfile(props) {
                                                 <img
                                                     src={
                                                         other.profile_pic_url ||
-                                                        "/avatar.png"
+                                                        "/avatar.jpg"
                                                     }
                                                 />
                                                 <p>
@@ -147,122 +148,30 @@ export default function OtherProfile(props) {
                 </div>
             )}
 
-            {error && (
+            {!id && (
                 <div className="no-user-found-box">
-                    <p className="error-msg-dark">
-                        Oh oh, this user doesn't exist!
-                    </p>
-
-                    <iframe
-                        src="https://giphy.com/embed/11lE4F9K9UlqRa"
-                        width="480"
-                        height="317"
-                        frameBorder="0"
-                        className="giphy-embed"
-                        allowFullScreen
-                    ></iframe>
-
-                    <Link to="/">
-                        <button className="btn-purple">
-                            Back to my profile
-                        </button>
-                    </Link>
+                    {error && (
+                        <>
+                            <p className="error-msg-dark">
+                                Oh oh, this user doesn't exist!
+                            </p>
+                            <iframe
+                                src="https://giphy.com/embed/11lE4F9K9UlqRa"
+                                width="480"
+                                height="317"
+                                frameBorder="0"
+                                className="giphy-embed"
+                                allowFullScreen
+                            ></iframe>
+                            <Link to="/">
+                                <button className="btn-purple">
+                                    Back to my profile
+                                </button>
+                            </Link>
+                        </>
+                    )}
                 </div>
             )}
         </div>
     );
 }
-
-// export default class OtherProfile extends Component {
-//     updateFriendShipStatus(status) {
-//         this.setState(
-//             {
-//                 friendship: status,
-//             },
-//             () => {
-//                 console.log("this.state.friendship: ", this.state.friendship);
-//             }
-//         );
-//     }
-
-//     componentDidMount() {
-//         //we want to make an axios request to server to get other user's info
-//         // console.log("this.props.match: ", this.props.match.params.id);
-//         // take care of situation where user tries to access
-//         // his own profile and we have to redirect in that case to '/' route to render his own component
-//         axios
-//             .get(`/show-users/${this.props.match.params.id}`)
-//             .then((response) => {
-//                 // console.log("response: ", response);
-//                 console.log(response.data.playlist);
-//                 if (this.props.match.params.id == response.data.cookie) {
-//                     return this.props.history.push("/");
-//                     //make sure server sends back loggedin user id
-//                 }
-
-//                 this.setState({
-//                     id: response.data.rows.id,
-//                     firstName: response.data.rows.first,
-//                     lastName: response.data.rows.last,
-//                     profilePicUrl: response.data.rows.profile_pic_url,
-//                     bio: response.data.rows.bio,
-//                     // playlist: response.data.rows.playlist,
-//                     error: false,
-//                 });
-//             })
-//             .catch((err) => {
-//                 console.log("error in axios api/user: ", err);
-//                 this.setState({
-//                     error: true,
-//                 });
-//             });
-//     }
-
-//     render() {
-//         if (this.state.id) {
-//             return (
-//                 <div className="profile-box">
-//                     <img
-//                         className="profile-pic"
-//                         src={this.state.profilePicUrl || "/avatar.png"}
-//                         alt={`${this.state.firstName} ${this.state.lastName}`}
-//                     />
-//                     <h3>
-//                         {this.state.firstName} {this.state.lastName}
-//                     </h3>
-
-//                     <p className="bio-text">{this.state.bio}</p>
-//                     <FriendshipButton
-//                         id={this.state.id}
-//                         updateFriendShipStatus={(e) => {
-//                             this.updateFriendShipStatus(e);
-//                         }}
-//                     />
-//                 </div>
-//             );
-//         }
-//         return (
-//             <div className="no-user-found-box">
-//                 {this.state.error && (
-//                     <p className="error-msg-dark">
-//                         Oh oh, this user doesn't exist!
-//                     </p>
-//                 )}
-//                 <iframe
-//                     src="https://giphy.com/embed/11lE4F9K9UlqRa"
-//                     width="480"
-//                     height="317"
-//                     frameBorder="0"
-//                     className="giphy-embed"
-//                     allowFullScreen
-//                 ></iframe>
-
-//                 <Link to="/">
-//                     <button className="btn-purple">Back to my profile</button>
-//                 </Link>
-//             </div>
-//         );
-//     }
-// }
-
-// //    <Playlist id={this.state.id} playlist={this.state.playlist} />;

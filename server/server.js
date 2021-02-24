@@ -477,6 +477,20 @@ app.get("/friends-of-others/:userId", (req, res) => {
 app.post("/delete-profile-pic", (req, res) => {
     console.log("I am delete post pic");
 
+    db.fetchProfileData(req.session.userId)
+        .then(({ rows }) => {
+            // console.log("get usrowser rows in 0", rows[0]);
+            console.log("Deleting image:", rows[0].profile_pic_url);
+
+            if (rows[0].profile_pic_url != null) {
+                s3.deleteImage(rows[0].profile_pic_url);
+            }
+        })
+        .catch((err) => {
+            console.log(err, "error in getProfile");
+            res.json({ success: false });
+        });
+
     db.deleteProfilePic(req.session.userId)
         .then(({ rows }) => {
             console.log("rows: ", rows);
@@ -496,13 +510,17 @@ app.post("/delete-account", async (req, res) => {
     const userId = req.session.userId;
 
     try {
-        // const image = await db.fetchProfileData(userId);
-        // await s3.deleteImage(image.profile_pic_url);
+        const users = await db.fetchProfileData(userId);
+
+        if (users.rows[0].profile_pic_url != null) {
+            s3.deleteImage(users.rows[0].profile_pic_url);
+        }
+        // s3.deleteImage(users.rows[0].profile_pic_url);
         db.deleteCodes(userId);
         db.deleteChats(userId);
         db.deleteFrienships(userId);
         await db.deleteUser(userId);
-        // res.json({ success: true });
+
         res.redirect("/logout");
     } catch (err) {
         console.log("err in delete account: ", err);

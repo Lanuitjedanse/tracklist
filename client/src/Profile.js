@@ -23,11 +23,13 @@ export default function Profile(props) {
                         src="/camera.svg"
                         onClick={props.toggleUploader}
                     />
-                    <DeleteProfilePic
-                        profilePicUrl={props.profilePicUrl}
-                        deletePic={props.deletePic}
-                        id={props.id}
-                    />
+                    {props.profilePicUrl && (
+                        <DeleteProfilePic
+                            profilePicUrl={props.profilePicUrl}
+                            deletePic={props.deletePic}
+                            id={props.id}
+                        />
+                    )}
                 </div>
             </div>
 

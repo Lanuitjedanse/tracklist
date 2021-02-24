@@ -53,7 +53,7 @@ export default function Chat(props) {
                             <div className="user-chat-box">
                                 <img
                                     className="chat-pic"
-                                    src={msg.profile_pic_url || "/avatar.png"}
+                                    src={msg.profile_pic_url || "/avatar.jpg"}
                                 />
 
                                 <p>
