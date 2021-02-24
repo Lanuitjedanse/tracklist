@@ -1,5 +1,6 @@
 // import React from "react";
 // import axios from "./Axios";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -50,7 +51,11 @@ export default function Friends() {
                 {wannabes.length === 0 && <p>No pending requests!</p>}
                 {wannabes &&
                     wannabes.map((friend) => (
-                        <div className="wannabes" key={friend.id}>
+                        <Link
+                            to={`/user/${friend.id}`}
+                            className="wannabes"
+                            key={friend.id}
+                        >
                             <img
                                 src={friend.profile_pic_url || "/avatar.png"}
                             />
@@ -75,7 +80,7 @@ export default function Friends() {
                                     Ghost
                                 </button>
                             </div>
-                        </div>
+                        </Link>
                     ))}
             </div>
             <h2>Friends</h2>
@@ -83,7 +88,11 @@ export default function Friends() {
                 {friends.length === 0 && <p>You have no friends, LOOOOSER!</p>}
                 {friends &&
                     friends.map((friend) => (
-                        <div className="real-friends" key={friend.id}>
+                        <Link
+                            to={`/user/${friend.id}`}
+                            className="real-friends"
+                            key={friend.id}
+                        >
                             <img
                                 src={friend.profile_pic_url || "/avatar.png"}
                             />
@@ -100,7 +109,7 @@ export default function Friends() {
                                     Unfriend
                                 </button>
                             </div>
-                        </div>
+                        </Link>
                     ))}
             </div>
             <h2>My pending requests</h2>
@@ -108,7 +117,11 @@ export default function Friends() {
                 {pendingFriends.length === 0 && <p>No pending requests!</p>}
                 {pendingFriends &&
                     pendingFriends.map((friend) => (
-                        <div className="wannabes" key={friend.id}>
+                        <Link
+                            className="wannabes"
+                            to={`/user/${friend.id}`}
+                            key={friend.id}
+                        >
                             <img
                                 src={friend.profile_pic_url || "/avatar.png"}
                             />
@@ -125,7 +138,7 @@ export default function Friends() {
                                     Cancel
                                 </button>
                             </div>
-                        </div>
+                        </Link>
                     ))}
             </div>
         </div>

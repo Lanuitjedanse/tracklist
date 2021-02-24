@@ -300,10 +300,22 @@ textarea:focus {
 }
 
 .user-search a {
-    align-self: flex-start;
+    align-self: center;
     display: flex;
     align-items: center;
     text-decoration: none;
+    background-color: #b088f954;
+    /* color: black; */
+    min-width: 400px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.user-search a:hover {
+    background-color: #9870fca3;
+    box-shadow: 3px 3px 3px #94959a;
+    transform: translate(-3px, -3px);
+    transition: all 0.05s;
 }
 
 .user-search img {
@@ -316,7 +328,7 @@ textarea:focus {
 
 .user-search p {
     margin: 0 20px;
-    color: #b088f9;
+    color: black;
 }
 
 .user-search input::placeholder {
@@ -354,22 +366,25 @@ textarea:focus {
 }
 
 .friends {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-auto-flow: row;
+    /* grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); */
     min-height: 250px;
 }
 
 .wannabes,
 .real-friends {
-    /* margin: 20px; */
-    /* background-color: hotpink; */
+    background-color: #b088f945;
+    border-radius: 15px;
+    margin: 5px;
     /* width: 100%; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+    color: black;
 }
 
 .wannabes img,
@@ -379,6 +394,15 @@ textarea:focus {
     width: 150px;
     border-radius: 15px;
     object-fit: cover;
+}
+
+.real-friends:hover,
+.wannabes:hover {
+    cursor: pointer;
+    background-color: #b088f9b0;
+    box-shadow: 3px 3px 3px #94959a;
+    transform: translate(-3px, -3px);
+    transition: all 0.05s;
 }
 
 .friends-req-box {

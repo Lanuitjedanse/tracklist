@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import Welcome from "./Welcome";
+import Welcome from "./welcome";
 // import Logo from "./Logo";
 import App from "./App";
 

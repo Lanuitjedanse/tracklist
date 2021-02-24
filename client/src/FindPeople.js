@@ -46,7 +46,7 @@ export default function FindPeople() {
 
     return (
         <div className="user-search">
-            <h3>Our three last signers</h3>
+            <h3>Meet our three newest members!</h3>
             {lastUsers &&
                 lastUsers.map((user) => {
                     return (
