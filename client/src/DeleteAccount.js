@@ -23,9 +23,9 @@ export default function DeleteAccount() {
     };
 
     return (
-        <div>
+        <div className="delete-container">
             <button
-                className="btn-purple btn-no"
+                className="btn-purple btn-delete"
                 onClick={() => toggleDelete()}
             >
                 Delete your account
@@ -33,18 +33,20 @@ export default function DeleteAccount() {
             {toggleDel && (
                 <div className="delete-box">
                     <p>Are you sure?</p>
-                    <button
-                        className="btn-purple btn-no"
-                        onClick={() => deleteProfile()}
-                    >
-                        Yes, adios!
-                    </button>
-                    <button
-                        className="btn-purple btn-no"
-                        onClick={() => toggleDelete()}
-                    >
-                        No, I want to stay
-                    </button>
+                    <div className="button-box">
+                        <button
+                            className="btn-purple btn-delete"
+                            onClick={() => deleteProfile()}
+                        >
+                            Yes
+                        </button>
+                        <button
+                            className="btn-purple btn-delete"
+                            onClick={() => toggleDelete()}
+                        >
+                            No
+                        </button>
+                    </div>
                 </div>
             )}
         </div>

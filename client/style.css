@@ -405,9 +405,12 @@ textarea:focus {
     background-color: #b088f93d;
 }
 
-/* .btn-delete {
-    color: black;
-} */
+.btn-delete {
+    min-width: 50px;
+    color: white;
+    background-color: #af88f98a;
+    border: 1px solid #af88f98a;
+}
 
 .btn-no:hover {
     background-color: #af88f98a;
@@ -628,9 +631,12 @@ textarea::placeholder {
     text-align: center;
     margin: 10px;
 }
-
-.profile-container {
-    /* height: calc(100vh - 80px); */
+.delete-container,
+.delete-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 @-webkit-keyframes spinner {
     0% {

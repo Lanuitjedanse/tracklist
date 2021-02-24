@@ -9,6 +9,7 @@ const cryptoRandomString = require("crypto-random-string");
 const cookieSession = require("cookie-session");
 const { hash, compare } = require("./bc");
 const s3 = require("./s3");
+
 const config = require("../config");
 const { uploader } = require("./upload");
 
@@ -469,6 +470,7 @@ app.post("/delete-profile-pic", (req, res) => {
     db.deleteProfilePic(req.session.userId)
         .then(({ rows }) => {
             console.log("rows: ", rows);
+
             res.json({ success: true, rows: rows });
         })
         .catch((err) => {
@@ -484,6 +486,8 @@ app.post("/delete-account", async (req, res) => {
     const userId = req.session.userId;
 
     try {
+        // const image = await db.fetchProfileData(userId);
+        // await s3.deleteImage(image.profile_pic_url);
         db.deleteCodes(userId);
         db.deleteChats(userId);
         db.deleteFrienships(userId);
@@ -534,17 +538,6 @@ server.listen(process.env.PORT || 3001, function () {
 
 io.on("connection", async (socket) => {
     const { userId } = socket.request.session;
-    // const { chat } = req.body;
-    // all code related to socket has to go here
-    // console.log(`socket with id: ${socket.id} has connected`);
-
-    // socket.emit("hello", {
-    //     cohort: "Adobo",
-    // });
-
-    // socket.on("disconnect: ", () => {
-    //     console.log(`socket with id: ${socket.id} just disconnected`);
-    // });
 
     if (!userId) {
         return socket.disonnect(true);
