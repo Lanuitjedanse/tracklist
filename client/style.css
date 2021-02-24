@@ -540,6 +540,7 @@ textarea:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: calc(100vh - 80px);
 }
 
 .chat h2 {
@@ -684,7 +685,7 @@ textarea::placeholder {
     }
 }
 
-@media screen and (min-width: 350px) and (max-width: 900px) {
+@media screen and (min-width: 300px) and (max-width: 900px) {
     .friends {
         display: flex;
         flex-direction: column;

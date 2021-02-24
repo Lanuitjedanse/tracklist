@@ -76,7 +76,6 @@ export default class App extends Component {
             // return null;
             return (
                 <div className="spinner-page">
-                    <div className="spinner-container"></div>
                     <img src="/loading.svg" className="spinner" />
                 </div>
             );

@@ -46,9 +46,8 @@ export default function Friends() {
     return (
         <div className="friends-req-box">
             <h2>Wannabes</h2>
-
+            {wannabes.length === 0 && <p>No pending requests!</p>}
             <div className="friends">
-                {wannabes.length === 0 && <p>No pending requests!</p>}
                 {wannabes &&
                     wannabes.map((friend) => (
                         <Link
@@ -84,8 +83,8 @@ export default function Friends() {
                     ))}
             </div>
             <h2>Friends</h2>
+            {friends.length === 0 && <p>You have no friends, LOOOOSER!</p>}
             <div className="friends">
-                {friends.length === 0 && <p>You have no friends, LOOOOSER!</p>}
                 {friends &&
                     friends.map((friend) => (
                         <Link
@@ -113,8 +112,8 @@ export default function Friends() {
                     ))}
             </div>
             <h2>My pending requests</h2>
+            {pendingFriends.length === 0 && <p>No pending requests!</p>}
             <div className="friends">
-                {pendingFriends.length === 0 && <p>No pending requests!</p>}
                 {pendingFriends &&
                     pendingFriends.map((friend) => (
                         <Link
