@@ -1,6 +1,6 @@
 // "dumb" /presentational are alternative for function component
 import { HashRouter, Route } from "react-router-dom";
-import Registration from "./Registration";
+import Registration from "./registration";
 import Login from "./Login";
 import Logo from "./Logo";
 import ResetPassword from "./resetpassword";
