@@ -8,17 +8,22 @@ import Playlist from "./Playlist";
 
 export default function Header(props) {
     const [mQuery, setMQuery] = useState();
+    const [screenSize, setScreenSize] = useState();
 
     useEffect(() => {
         window.addEventListener("resize", updateSize);
+        setScreenSize(window.innerWidth);
+        // console.log("window.width: ", window.innerWidth);
     });
 
     const updateSize = () => {
         // console.log("size updated");
         let mql = window.matchMedia("(max-width: 900px)");
         setMQuery(mql.matches);
+
         // console.log(mql.matches); // true or false
     };
+
     const [burgerOpen, setBurgerOpen] = useState(false);
 
     const toggleBurgerMenu = () => {
@@ -43,7 +48,7 @@ export default function Header(props) {
                     <h2 className="brand-header">Tracklist</h2>
                 </div>
                 <div className="log-pic-box">
-                    {mQuery ? (
+                    {screenSize < 900 || mQuery ? (
                         <img
                             onClick={toggleBurgerMenu}
                             className="icon-menu"
