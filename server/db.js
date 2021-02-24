@@ -123,6 +123,16 @@ module.exports.showFriends = (userId) => {
     return db.query(q, params);
 };
 
+module.exports.showFriendsOthers = (userId) => {
+    const q = `SELECT users.id, first, last, profile_pic_url, accepted, sender_id, recipient_id
+    FROM friendships
+    JOIN users
+    ON (accepted = true AND recipient_id = $1 AND sender_id = users.id)
+    OR (accepted = true AND sender_id = $1 AND recipient_id = users.id)`;
+    const params = [userId];
+    return db.query(q, params);
+};
+
 module.exports.deleteProfilePic = (userId) => {
     const q = `UPDATE users
     SET profile_pic_url = null
@@ -157,6 +167,40 @@ module.exports.showLastMessage = () => {
 
     return db.query(q);
 };
+
+module.exports.deleteUser = (userId) => {
+    const q = `DELETE FROM users
+    WHERE id = $1`;
+    const params = [userId];
+    return db.query(q, params);
+};
+
+module.exports.deleteChats = (userId) => {
+    const q = `DELETE FROM chat
+    WHERE sender_id = $1`;
+    const params = [userId];
+    return db.query(q, params);
+};
+
+module.exports.deleteFrienships = (userId) => {
+    const q = `DELETE FROM friendships
+    WHERE sender_id = $1 OR recipient_id = $1`;
+    const params = [userId];
+    return db.query(q, params);
+};
+
+module.exports.deleteCodes = (userId) => {
+    const q = `DELETE FROM reset_codes
+    WHERE reset_id = $1`;
+    const params = [userId];
+    return db.query(q, params);
+};
+// DELETE users, chat, friendships, reset_codes
+//     FROM users
+//     LEFT JOIN chat ON users.id = chat.sender_id
+//     LEFT JOIN friendships ON users.id = friendships.sender_id OR users.id = recipient_id
+//     LEFT JOIN reset_codes ON users.id = reset_codes.reset_id
+//     WHERE users.id = 212;
 
 // module.exports.addPlaylist = (userId, playlist) => {
 //     const q = `UPDATE users

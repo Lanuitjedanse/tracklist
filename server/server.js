@@ -138,6 +138,7 @@ app.post("/profile-pic", uploader.single("file"), s3.upload, (req, res) => {
     console.log("I'm the post route user/profile-pic");
     const { filename } = req.file;
     const fullUrl = config.s3Url + filename;
+    // const fullUrl = `${userId}/${config.s3Url}${filename}`;
 
     console.log("req.session.userId: ", req.session.userId);
 
@@ -444,6 +445,24 @@ app.get("/friends-wannabes", (req, res) => {
         });
 });
 
+app.get("/friends-of-others/:userId", (req, res) => {
+    console.log("get wannabes route");
+    // console.log("user id: ", req.session.userId);
+
+    const { userId } = req.params;
+    db.showFriendsOthers(userId)
+        .then(({ rows }) => {
+            console.log("getting all friends requests");
+            console.log("rows:", rows);
+
+            res.json({ success: true, rows: rows, userId: req.session.userId });
+        })
+        .catch((err) => {
+            console.log("err in showfriends: ", err);
+            res.json({ success: false });
+        });
+});
+
 app.post("/delete-profile-pic", (req, res) => {
     console.log("I am delete post pic");
 
@@ -458,6 +477,23 @@ app.post("/delete-profile-pic", (req, res) => {
                 err
             );
         });
+});
+
+app.post("/delete-account", async (req, res) => {
+    console.log("I'm the delete post route");
+    const userId = req.session.userId;
+
+    try {
+        db.deleteCodes(userId);
+        db.deleteChats(userId);
+        db.deleteFrienships(userId);
+        await db.deleteUser(userId);
+        // res.json({ success: true });
+        res.redirect("/logout");
+    } catch (err) {
+        console.log("err in delete account: ", err);
+        res.json({ success: false });
+    }
 });
 // app.post("/playlist", (req, res) => {
 //     console.log("I am the playlist route");

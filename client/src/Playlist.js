@@ -52,14 +52,3 @@ export default function Playlist() {
         </div>
     );
 }
-
-//    <input
-//             className="playlist-link"
-//             onChange={(e) => uploadLink(e.target.value)}
-//             name="playlist"
-//             type="text"
-//             placeholder="playlist"
-//         ></input>
-//         <button onClick={() => setAddLink()}>Add Playlist</button>
-
-// https://open.spotify.com/playlist/51siUNlGNdF4Bp78hKZ8RA?si=AtHrbvPiRWeoLlKm0ViTZA

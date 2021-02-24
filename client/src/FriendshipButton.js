@@ -24,7 +24,7 @@ export default function FriendshipButton(props) {
         axios
             .get(`/check-friendship/${props.id}`)
             .then(({ data }) => {
-                console.log("data.friend: ", data.friend);
+                // console.log("data.friend: ", data.friend);
 
                 console.log("data: ", data.button);
                 setFriendshipStatus(data.button);

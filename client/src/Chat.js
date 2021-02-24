@@ -1,18 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import axios from "./Axios";
-import { chatMessage, chatMessages } from "./Actions";
+
 import { socket } from "./Socket";
 
 export default function Chat(props) {
-    // const [message, setMessage] = useState();
-    // const dispatch = useDispatch();
     const textRef = useRef("");
     const scrollRef = useRef();
 
     const allMessages = useSelector((state) => state.messages);
-    // const cookie = useSelector((state) => state.cookie);
 
     const scrollToBottom = () => {
         scrollRef.current.scrollTop =
@@ -25,7 +20,6 @@ export default function Chat(props) {
 
     const messageHandleChange = (e) => {
         textRef.current.value = e.target.value;
-        console.log(e.target.value);
     };
 
     const enterMessage = (e) => {
@@ -36,18 +30,10 @@ export default function Chat(props) {
     };
 
     const sendMessage = () => {
-        console.log("I was clicked");
-        console.log("current text input ", textRef.current.value);
-        console.log("current text input ", textRef.current.value.length);
-
         if (textRef.current.value != 0) {
             socket.emit("chatMessage", textRef.current.value);
             textRef.current.value = "";
         }
-
-        // dispatch(sendMessage(textRef.current.value));
-
-        // scrollToBottom();
     };
 
     return (

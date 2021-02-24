@@ -4,7 +4,7 @@ export async function receiveFriendsWannabes() {
     const { data } = await axios.get(`/friends-wannabes`);
 
     if (data.success) {
-        console.log("data.rows : ", data.rows);
+        // console.log("data.rows : ", data.rows);
 
         return {
             type: "SHOW_WANNABES",
@@ -51,9 +51,6 @@ export function chatMessage(text) {
 }
 
 export function chatMessages(messages) {
-    // socket.emit("chatMessages", messages);
-    console.log("messages: ", messages);
-
     return {
         type: "SHOW_MESSAGES",
         messages,
@@ -61,31 +58,8 @@ export function chatMessages(messages) {
 }
 
 export function showNewMessage(newMessage) {
-    // console.log("messages: ", newMessage);
-    console.log("newMessage: ", newMessage);
-    console.log("newMessage: ", newMessage.cookie);
-    console.log("newMessage.newmessage: ", newMessage.newMessage);
-
     return {
         type: "SHOW_NEW_MESSAGE",
         newMessage,
     };
 }
-
-// export async function pendingFriends(id) {
-//     try {
-//         const { data } = await axios.post("/check-friendship/end", { id });
-//         console.log(("pending data: ", data));
-//         console.log("acceptFriend data.rows.id", data.rows);
-//         console.log("data.rows : ", data.rows[0].sender_id);
-
-//         if (data.rows[0].sender_id === id) {
-//             return {
-//                 type: "SHOW_PENDING",
-//                 id: id,
-//             };
-//         }
-//     } catch (err) {
-//         console.log("err pending friend: ", err);
-//     }
-// }

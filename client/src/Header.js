@@ -6,19 +6,10 @@ import HamburgerMenu from "./HamburgerMenu";
 import { useState, useEffect } from "react";
 import Playlist from "./Playlist";
 
-// import { Link } from "react-router-dom";
-
 export default function Header(props) {
     const [mQuery, setMQuery] = useState();
 
-    // const [updateSize, setUpdateSize] = useState();
-    // const [menuVisible, setMenuVisible] = useState(false);
-
-    // console.log("props: ", props);
-    // console.log("mql: ", mql);
-
     useEffect(() => {
-        // componentDidMount - registers eventlistener, event fired by the browser
         window.addEventListener("resize", updateSize);
     });
 
@@ -31,14 +22,12 @@ export default function Header(props) {
     const [burgerOpen, setBurgerOpen] = useState(false);
 
     const toggleBurgerMenu = () => {
-        console.log("burger open");
         setBurgerOpen(!burgerOpen);
     };
 
     const [playlistOpen, setPlaylistOpen] = useState(false);
 
     const togglePlaylist = () => {
-        console.log("burger open");
         setPlaylistOpen(!playlistOpen);
     };
 
@@ -75,28 +64,3 @@ export default function Header(props) {
         </>
     );
 }
-
-//  return (
-//      <>
-//          <header>
-//              <div className="logo-title">
-//                  <LogoWhite />
-//                  <h2 className="brand-header">Tracklist</h2>
-//              </div>
-//              <div className="log-pic-box">
-//                  {mQuery ? (
-//                      <img
-//                          onClick={toggleBurgerMenu}
-//                          className="icon"
-//                          src="/hamburger-menu.svg"
-//                      />
-//                  ) : (
-//                      <Menu />
-//                  )}
-//                  <ProfilePic {...props} />
-//              </div>
-//          </header>
-//          {burgerOpen && <HamburgerMenu />}
-//          {burgerOpen && <HamburgerMenu />}
-//      </>
-//  );

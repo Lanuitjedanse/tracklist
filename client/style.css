@@ -161,13 +161,21 @@ header {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    /* height: 90vh; */
+    height: calc(100vh - 80px);
+}
+
+.profile-btn-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 80px;
 }
 
 .btn-purple {
     margin: 10px 0;
     color: white;
-    height: 30px;
+    padding: 6px;
     font-size: 15px;
     border-radius: 15px;
     border: 1px solid #9870fc;
@@ -397,8 +405,8 @@ textarea:focus {
     background-color: #b088f93d;
 }
 
-/* .btn-no:hover {
-    background-color: #af88f98a;
+/* .btn-delete {
+    color: black;
 } */
 
 .btn-no:hover {
@@ -444,8 +452,11 @@ textarea:focus {
     background-color: black;
 }
 
-.active > p {
-    color: #ffc3e7;
+.active > p,
+.active > p:hover {
+    color: #fffbad;
+    text-decoration: underline;
+    cursor: default;
     /* font-weight: bold; */
     /* text-decoration: underline; */
 }
@@ -522,6 +533,10 @@ textarea:focus {
     padding: 5px;
 }
 
+textarea::placeholder {
+    color: #b088f9;
+}
+
 .user-chat-box {
     display: flex;
     align-items: center;
@@ -529,18 +544,94 @@ textarea:focus {
 
 .chat-msg-box-purple {
     padding: 5px;
-    background-color: #ffe0f7;
+    background-color: #f9f7cf;
     margin: 10px;
     border-radius: 10px;
 }
 
 .chat-msg-box-pink {
     padding: 5px;
-    background-color: #bbf1fa;
+    background-color: #e6e6e6;
     margin: 10px;
     border-radius: 10px;
 }
 
+.other-friends-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-content: center;
+    gap: 10px;
+    border-radius: 10px;
+    width: 80%;
+}
+
+.friends-others {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #b088f973;
+    justify-content: space-evenly;
+}
+
+.other-friends-box a {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-size: 12px;
+}
+
+.us-pic img,
+.other-friend img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+    padding: 7px;
+}
+
+.no-friend {
+    grid-row: 1 / 2;
+}
+
+.us-pic {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.us-box {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fffa9b94;
+}
+
+.us-box p {
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.other-friends-box p {
+    font-size: 12px;
+}
+
+.title-friends {
+    text-align: center;
+    margin: 10px;
+}
+
+.profile-container {
+    /* height: calc(100vh - 80px); */
+}
 @-webkit-keyframes spinner {
     0% {
         -webkit-transform: rotate(0);
