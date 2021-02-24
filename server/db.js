@@ -1,4 +1,3 @@
-const { queryByDisplayValue } = require("@testing-library/react");
 const spicedPg = require("spiced-pg");
 
 let db;

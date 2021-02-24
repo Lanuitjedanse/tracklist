@@ -407,6 +407,7 @@ textarea:focus {
 
 .btn-delete {
     min-width: 50px;
+    margin: 10px 5px;
     color: white;
     background-color: #af88f98a;
     border: 1px solid #af88f98a;

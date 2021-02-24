@@ -15,9 +15,20 @@ const { uploader } = require("./upload");
 
 // socket io
 const server = require("http").Server(app);
+// const io = require("socket.io")(server, {
+//     allowRequest: (req, callback) =>
+//         callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+// });
+
 const io = require("socket.io")(server, {
     allowRequest: (req, callback) =>
-        callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+        callback(
+            null,
+            req.headers.referer.startsWith("http://localhost:3000") ||
+                req.headers.referer.startsWith(
+                    "http://social-tracklist.herokuapp.com"
+                )
+        ),
 });
 
 let cookie_sec;
