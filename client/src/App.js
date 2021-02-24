@@ -29,7 +29,7 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        console.log("component mounted");
+        // console.log("component mounted");
 
         axios
             .get("/api/user")

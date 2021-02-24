@@ -9,7 +9,7 @@ export default function FindPeople() {
     const [errorMessage, setErrorMessage] = useState(false);
 
     useEffect(() => {
-        console.log("useEffect is running!");
+        // console.log("useEffect is running!");
         axios
             .get("/users")
             .then(({ data }) => {
@@ -27,7 +27,7 @@ export default function FindPeople() {
             axios
                 .get(`/find/${userInput}`)
                 .then(({ data }) => {
-                    console.log("data in find users: ", data);
+                    // console.log("data in find users: ", data);
 
                     if (!abort) {
                         setResultsUsers(data.users);

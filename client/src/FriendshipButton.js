@@ -18,7 +18,7 @@ export default function FriendshipButton(props) {
     // const [submit, setSubmit] = useState();
 
     useEffect(() => {
-        console.log("useEffect is running!");
+        // console.log("useEffect is running!");
         // console.log("viewee: ", viewee);
 
         axios
@@ -26,7 +26,7 @@ export default function FriendshipButton(props) {
             .then(({ data }) => {
                 // console.log("data.friend: ", data.friend);
 
-                console.log("data: ", data.button);
+                // console.log("data: ", data.button);
                 setFriendshipStatus(data.button);
 
                 if (data.button == "accept") {

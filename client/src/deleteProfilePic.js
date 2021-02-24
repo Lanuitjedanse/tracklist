@@ -19,12 +19,12 @@ export default function DeleteProfilePic(props) {
     };
 
     return (
-        <div>
+        <>
             <img
                 onClick={() => submit()}
                 src="/delete.svg"
                 className="delete"
             />
-        </div>
+        </>
     );
 }

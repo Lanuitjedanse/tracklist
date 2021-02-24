@@ -5,13 +5,6 @@ export default function ProfilePic({
     toggleUploader,
     size = "",
 }) {
-    // console.log("props in profilePic: ", props);
-    // let { ProfilePicUrl } = props;
-    // let { firstName, lastName, profilePicUrl, toggleUploader } = props;
-    {
-        /* <div className="profile-pic-box"> */
-    }
-
     return (
         <img
             src={profilePicUrl || "/avatar.png"} // need to change this

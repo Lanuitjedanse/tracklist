@@ -31,7 +31,7 @@ export default class BioEditor extends React.Component {
         axios
             .post("/bio", this.state)
             .then((response) => {
-                console.log("response: ", response);
+                // console.log("response: ", response);
 
                 this.setState({
                     bio: response.data.bio,

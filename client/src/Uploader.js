@@ -32,11 +32,11 @@ export default class Uploader extends Component {
         axios
             .post("/profile-pic", formData)
             .then((response) => {
-                console.log("profile pic woop woop!");
-                console.log(
-                    "response.data.rows profile pic: ",
-                    response.data.rows
-                );
+                // console.log("profile pic woop woop!");
+                // console.log(
+                //     "response.data.rows profile pic: ",
+                //     response.data.rows
+                // );
 
                 this.props.setProfilePicUrl(response.data.rows);
             })

@@ -22,7 +22,7 @@ export default class OtherProfileClass extends Component {
                 friendship: status,
             },
             () => {
-                console.log("this.state.friendship: ", this.state.friendship);
+                // console.log("this.state.friendship: ", this.state.friendship);
             }
         );
     }
@@ -36,7 +36,7 @@ export default class OtherProfileClass extends Component {
             .get(`/show-users/${this.props.match.params.id}`)
             .then((response) => {
                 // console.log("response: ", response);
-                console.log(response.data.playlist);
+                // console.log(response.data.playlist);
                 if (this.props.match.params.id == response.data.cookie) {
                     return this.props.history.push("/");
                     //make sure server sends back loggedin user id

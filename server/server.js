@@ -13,22 +13,21 @@ const s3 = require("./s3");
 const config = require("../config");
 const { uploader } = require("./upload");
 
-// socket io
 const server = require("http").Server(app);
+
 // const io = require("socket.io")(server, {
 //     allowRequest: (req, callback) =>
-//         callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+//         callback(
+//             null,
+//             req.headers.referer.startsWith("http://localhost:3000") ||
+//                 req.headers.referer.startsWith(
+//                     "https://social-tracklist.herokuapp.com"
+//                 )
+//         ),
 // });
 
 const io = require("socket.io")(server, {
-    allowRequest: (req, callback) =>
-        callback(
-            null,
-            req.headers.referer.startsWith("http://localhost:3000") ||
-                req.headers.referer.startsWith(
-                    "http://social-tracklist.herokuapp.com"
-                )
-        ),
+    origins: "localhost:3000 https://social-tracklist.herokuapp.com/:*",
 });
 
 let cookie_sec;
