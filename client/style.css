@@ -667,6 +667,7 @@ textarea::placeholder {
     justify-content: center;
     align-items: center;
 }
+
 @-webkit-keyframes spinner {
     0% {
         -webkit-transform: rotate(0);
@@ -742,6 +743,14 @@ textarea::placeholder {
 
     .btn-delete {
         min-width: 80%;
+    }
+
+    .button-box {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        width: 100%;
+        align-items: center;
     }
 }
 

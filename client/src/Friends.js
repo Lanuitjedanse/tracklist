@@ -61,7 +61,7 @@ export default function Friends() {
                             <p>
                                 {friend.first} {friend.last}
                             </p>
-                            <div>
+                            <div className="button-box">
                                 <button
                                     className="btn-purple btn-yes"
                                     onClick={() =>
