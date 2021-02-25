@@ -45,7 +45,7 @@ export default function Friends() {
 
     return (
         <div className="friends-req-box">
-            <h2>Wannabes</h2>
+            <h2>{wannabes.length} Wannabes</h2>
             {wannabes.length === 0 && <p>No pending requests!</p>}
             <div className="friends">
                 {wannabes &&
@@ -82,7 +82,7 @@ export default function Friends() {
                         </Link>
                     ))}
             </div>
-            <h2>Friends</h2>
+            <h2>{friends.length} Friends</h2>
             {friends.length === 0 && <p>You have no friends, LOOOOSER!</p>}
             <div className="friends">
                 {friends &&
@@ -111,7 +111,7 @@ export default function Friends() {
                         </Link>
                     ))}
             </div>
-            <h2>My pending requests</h2>
+            <h2>{pendingFriends.length} pending requests</h2>
             {pendingFriends.length === 0 && <p>No pending requests!</p>}
             <div className="friends">
                 {pendingFriends &&

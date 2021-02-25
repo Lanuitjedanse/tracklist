@@ -54,18 +54,19 @@ export default function OtherProfile(props) {
             .then((response) => {
                 const userId = response.data.userId;
 
-                const me = response.data.rows.find((friend) => {
-                    return (
-                        friend.sender_id == userId ||
-                        friend.recipient_id == userId
-                    );
-                });
-                const notMe = response.data.rows.find((friend) => {
-                    return (
-                        friend.sender_id != userId &&
-                        friend.recipient_id != userId
-                    );
-                });
+                let notMe = response.data.rows.filter(
+                    (friend) =>
+                        friend.recipient_id != userId &&
+                        friend.sender_id != userId
+                );
+
+                let me = response.data.rows.find(
+                    (friend) =>
+                        friend.recipient_id == userId ||
+                        friend.sender_id == userId
+                );
+
+                console.log("notMe: ", notMe);
 
                 setUserMe(me);
                 setOtherFriends(notMe);
@@ -117,7 +118,7 @@ export default function OtherProfile(props) {
                         </div>
                     )}
 
-                    {otherFriends.length != 0 && (
+                    {otherFriends && otherFriends.length != 0 && (
                         <div className="friends-others">
                             <h4 className="title-friends">
                                 {firstName}'s friends
@@ -148,30 +149,28 @@ export default function OtherProfile(props) {
                 </div>
             )}
 
-            {!id && (
-                <div className="no-user-found-box">
-                    {error && (
-                        <>
-                            <p className="error-msg-dark">
-                                Oh oh, this user doesn't exist!
-                            </p>
-                            <iframe
-                                src="https://giphy.com/embed/11lE4F9K9UlqRa"
-                                width="480"
-                                height="317"
-                                frameBorder="0"
-                                className="giphy-embed"
-                                allowFullScreen
-                            ></iframe>
-                            <Link to="/">
-                                <button className="btn-purple">
-                                    Back to my profile
-                                </button>
-                            </Link>
-                        </>
-                    )}
-                </div>
-            )}
+            <div className="no-user-found-box">
+                {error && (
+                    <>
+                        <p className="error-msg-dark">
+                            Oh oh, this user doesn't exist!
+                        </p>
+                        <iframe
+                            src="https://giphy.com/embed/11lE4F9K9UlqRa"
+                            width="480"
+                            height="317"
+                            frameBorder="0"
+                            className="giphy-embed"
+                            allowFullScreen
+                        ></iframe>
+                        <Link to="/">
+                            <button className="btn-purple">
+                                Back to my profile
+                            </button>
+                        </Link>
+                    </>
+                )}
+            </div>
         </div>
     );
 }
