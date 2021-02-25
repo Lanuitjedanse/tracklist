@@ -120,7 +120,7 @@ header {
 
 .reg-text {
     width: 60%;
-    text-align: justify;
+    text-align: center;
 }
 
 .link-log {
@@ -250,7 +250,7 @@ textarea:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* height: 90vh; */
+    height: calc(100vh - 80px);
 }
 
 .log-pic-box {
@@ -285,8 +285,8 @@ textarea:focus {
 
 .camera-icon {
     width: 30px;
-    margin-top: -29px;
-    margin-bottom: 10px;
+    /* margin-top: -29px;
+    margin-bottom: 10px; */
     cursor: pointer;
 }
 
@@ -517,13 +517,16 @@ textarea:focus {
 
 .delete {
     height: 25px;
-    margin-top: -29px;
-    margin-bottom: 15px;
+    /* margin-top: -29px;
+    margin-bottom: 15px; */
     cursor: pointer;
 }
 
 .icon-box {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
 }
 
 .previous-messages {
@@ -686,15 +689,59 @@ textarea::placeholder {
 }
 
 @media screen and (min-width: 300px) and (max-width: 900px) {
+    .super-container {
+        flex-direction: column;
+    }
     .friends {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        min-height: 100px;
     }
 
     .friends-req-box {
         height: 100%;
+    }
+
+    .welcome-box {
+        height: 35vh;
+    }
+
+    .right-box {
+        height: 65vh;
+    }
+
+    .user-search a {
+        min-width: 300px;
+    }
+
+    .user-search input {
+        min-width: 200px;
+    }
+
+    .previous-messages {
+        width: 90%;
+    }
+    .chat h2 {
+        margin: 10px;
+    }
+
+    .chat {
+        width: 100%;
+    }
+
+    .chat textarea {
+        margin: 0 auto;
+        width: 80%;
+    }
+
+    .btn-purple {
+        min-width: 60%;
+    }
+
+    .btn-delete {
+        min-width: 80%;
     }
 }
 

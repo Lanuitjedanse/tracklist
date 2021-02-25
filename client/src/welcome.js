@@ -12,11 +12,7 @@ export default function Welcome() {
                 <Logo />
                 <h2 className="brand-title">Tracklist</h2>
                 <p className="reg-text">
-                    I am baby chia trust fund cred kale chips chartreuse celiac
-                    irony schlitz. Shaman beard kitsch, farm-to-table cray
-                    yuccie pour-over meh. Occupy helvetica gluten-free deep v
-                    mlkshk wolf. Pickled irony man bun quinoa sustainable
-                    leggings chartreuse, fixie jean shorts.
+                    The new social network for music lovers
                 </p>
             </div>
             <HashRouter>
