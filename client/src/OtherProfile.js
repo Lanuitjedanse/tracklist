@@ -30,19 +30,21 @@ export default function OtherProfile(props) {
         axios
             .get(`/show-users/${props.match.params.id}`)
             .then((response) => {
-                // console.log("response: ", response);
+                console.log("response: ", response);
                 // console.log(response.data.playlist);
+                // console.log(props.match.params.id == response.data.cookie);
                 if (props.match.params.id == response.data.cookie) {
-                    return this.props.history.push("/");
+                    console.log("self check: ", props);
+                    return props.history.push("/");
                     //make sure server sends back loggedin user id
+                } else {
+                    setId(response.data.rows.id);
+                    setFirstName(response.data.rows.first);
+                    setLastName(response.data.rows.last);
+                    setProfilePicUrl(response.data.rows.profile_pic_url);
+                    setBio(response.data.rows.bio);
+                    setError(false);
                 }
-
-                setId(response.data.rows.id);
-                setFirstName(response.data.rows.first);
-                setLastName(response.data.rows.last);
-                setProfilePicUrl(response.data.rows.profile_pic_url);
-                setBio(response.data.rows.bio);
-                setError(false);
             })
             .catch((err) => {
                 console.log("error in axios api/user: ", err);
