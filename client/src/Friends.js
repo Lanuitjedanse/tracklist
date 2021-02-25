@@ -50,11 +50,7 @@ export default function Friends() {
             <div className="friends">
                 {wannabes &&
                     wannabes.map((friend) => (
-                        <Link
-                            to={`/user/${friend.id}`}
-                            className="wannabes"
-                            key={friend.id}
-                        >
+                        <div className="wannabes" key={friend.id}>
                             <img
                                 src={friend.profile_pic_url || "/avatar.jpg"}
                             />
@@ -79,7 +75,7 @@ export default function Friends() {
                                     Ghost
                                 </button>
                             </div>
-                        </Link>
+                        </div>
                     ))}
             </div>
             <h2>{friends.length} Friends</h2>
@@ -87,11 +83,7 @@ export default function Friends() {
             <div className="friends">
                 {friends &&
                     friends.map((friend) => (
-                        <Link
-                            to={`/user/${friend.id}`}
-                            className="real-friends"
-                            key={friend.id}
-                        >
+                        <div className="real-friends" key={friend.id}>
                             <img
                                 src={friend.profile_pic_url || "/avatar.jpg"}
                             />
@@ -108,7 +100,7 @@ export default function Friends() {
                                     Unfriend
                                 </button>
                             </div>
-                        </Link>
+                        </div>
                     ))}
             </div>
             <h2>{pendingFriends.length} pending requests</h2>
@@ -116,11 +108,7 @@ export default function Friends() {
             <div className="friends">
                 {pendingFriends &&
                     pendingFriends.map((friend) => (
-                        <Link
-                            className="wannabes"
-                            to={`/user/${friend.id}`}
-                            key={friend.id}
-                        >
+                        <div className="wannabes" key={friend.id}>
                             <img
                                 src={friend.profile_pic_url || "/avatar.jpg"}
                             />
@@ -137,7 +125,7 @@ export default function Friends() {
                                     Cancel
                                 </button>
                             </div>
-                        </Link>
+                        </div>
                     ))}
             </div>
         </div>

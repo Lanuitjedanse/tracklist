@@ -250,7 +250,7 @@ textarea:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 80px);
+    /* height: calc(100vh - 80px); */
 }
 
 .log-pic-box {
