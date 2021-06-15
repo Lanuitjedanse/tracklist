@@ -12,23 +12,15 @@ export default class Login extends React.Component {
     }
 
     handleChange(e) {
-        // console.log("e.target.value", e.target.value);
-        // console.log("e.target.name: ", e.target.name);
         this.setState({
             [e.target.name]: e.target.value,
         });
-        // console.log(this.state);
-        // () => console.log("this.state after setstate: ", this.state);
     }
 
     handleClick() {
-        // 1. send a user's input off to the server in a POST
-        // console.log("I handle the click");
         axios
             .post("/login", this.state)
             .then((response) => {
-                // console.log("response from server: ", response);
-
                 if (!response.data.success) {
                     this.setState({
                         error: true,

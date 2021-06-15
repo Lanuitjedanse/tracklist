@@ -9,11 +9,9 @@ export default function FindPeople() {
     const [errorMessage, setErrorMessage] = useState(false);
 
     useEffect(() => {
-        // console.log("useEffect is running!");
         axios
             .get("/users")
             .then(({ data }) => {
-                // console.log("data: ", data);
                 setLastUsers(data.rows);
             })
             .catch((err) => {
@@ -27,8 +25,6 @@ export default function FindPeople() {
             axios
                 .get(`/find/${userInput}`)
                 .then(({ data }) => {
-                    // console.log("data in find users: ", data);
-
                     if (!abort) {
                         setResultsUsers(data.users);
                         userInput && setErrorMessage(!data.success);
@@ -41,8 +37,6 @@ export default function FindPeople() {
                 });
         }
     }, [userInput]);
-
-    // console.log("users: ", users);
 
     return (
         <div className="user-search">

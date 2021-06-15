@@ -4,10 +4,6 @@ import DeleteProfilePic from "./deleteProfilePic";
 import DeleteAccount from "./DeleteAccount";
 
 export default function Profile(props) {
-    console.log("props in profile: ", props);
-    console.log("deletepic: ", props.deletePic);
-
-    // console.log("playlist: ", props.playlist);
     return (
         <div className="profile-box border-pink">
             <div className="profile-pic-box">
@@ -40,9 +36,4 @@ export default function Profile(props) {
             <DeleteAccount />
         </div>
     );
-}
-// <Playlist />;
-// need to add bio in bioeditor component
-{
-    /* <Playlist playlist={props.playlist} />; */
 }

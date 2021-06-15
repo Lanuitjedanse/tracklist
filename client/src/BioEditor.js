@@ -26,13 +26,10 @@ export default class BioEditor extends React.Component {
     }
 
     bioHandleClick(e) {
-        // console.log("hello");
         e.preventDefault();
         axios
             .post("/bio", this.state)
             .then((response) => {
-                // console.log("response: ", response);
-
                 this.setState({
                     bio: response.data.bio,
                     editingMode: false,
@@ -47,8 +44,6 @@ export default class BioEditor extends React.Component {
     }
 
     render() {
-        console.log("this.props in bio editor: ", this.props);
-
         if (this.state.editingMode) {
             return (
                 <div className="bio">

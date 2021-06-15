@@ -1,4 +1,3 @@
-import React from "react";
 import Menu from "./Menu";
 import LogoWhite from "./LogoWhite";
 import ProfilePic from "./ProfilePic";
@@ -13,15 +12,11 @@ export default function Header(props) {
     useEffect(() => {
         window.addEventListener("resize", updateSize);
         setScreenSize(window.innerWidth);
-        // console.log("window.width: ", window.innerWidth);
     });
 
     const updateSize = () => {
-        // console.log("size updated");
         let mql = window.matchMedia("(max-width: 900px)");
         setMQuery(mql.matches);
-
-        // console.log(mql.matches); // true or false
     };
 
     const [burgerOpen, setBurgerOpen] = useState(false);

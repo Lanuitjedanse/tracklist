@@ -6,10 +6,7 @@ import { render } from "@testing-library/react";
 // when no image prop is passed the default img is used as the src
 test("when no image prop is passed the default img is used as the src", () => {
     const { container } = render(<ProfilePic />);
-    console.log(
-        "container.querySelector(img)",
-        container.querySelector("img").src
-    );
+
     const img = container.querySelector("img");
     expect(img.src.endsWith("/avatar.png")).toBe(true);
 });

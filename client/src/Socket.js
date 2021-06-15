@@ -2,11 +2,6 @@ import { chatMessages, chatMessage, showNewMessage } from "./Actions";
 
 import { io } from "socket.io-client";
 
-// const socket = io.connect;
-// socket.on("hello", (data) => {
-//     console.log("data: ", data);
-// });
-
 export let socket;
 
 export const init = (store) => {

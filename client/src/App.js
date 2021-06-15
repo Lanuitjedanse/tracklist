@@ -1,7 +1,6 @@
 import { Component } from "react";
-// import React from "react";
+
 import axios from "./Axios";
-// import ProfilePic from "./ProfilePic";
 import Uploader from "./Uploader";
 import Profile from "./Profile";
 import Header from "./Header";
@@ -10,13 +9,6 @@ import FindPeople from "./FindPeople";
 import { BrowserRouter, Route } from "react-router-dom";
 import Friends from "./Friends";
 import Chat from "./Chat";
-
-// import { io } from "socket.io-client";
-
-// const socket = io.connect;
-// socket.on("hello", (data) => {
-//     console.log("data: ", data);
-// });
 
 export default class App extends Component {
     constructor(props) {
@@ -29,13 +21,9 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        // console.log("component mounted");
-
         axios
             .get("/api/user")
             .then((response) => {
-                // console.log("axios get user");
-                // console.log("response.data.success: ", response.data.rows);
                 this.setState({
                     firstName: response.data.rows.first,
                     lastName: response.data.rows.last,
@@ -70,10 +58,7 @@ export default class App extends Component {
     }
 
     render() {
-        // console.log("this.state in app: ", this.state);
-
         if (!this.state.id) {
-            // return null;
             return (
                 <div className="spinner-page">
                     <img src="/loading.svg" className="spinner" />
@@ -113,7 +98,6 @@ export default class App extends Component {
                                 deletePic={(profilePicUrl) =>
                                     this.deletePic(profilePicUrl)
                                 }
-                                // playlist={this.state.playlist}
                             />
                         )}
                     />
@@ -124,9 +108,6 @@ export default class App extends Component {
                                 key={props.match.url}
                                 match={props.match}
                                 history={props.history}
-                                // playlist={props.playlist}
-
-                                // playlist={this.state.playlist}
                             />
                         )}
                     />
@@ -151,16 +132,3 @@ export default class App extends Component {
         );
     }
 }
-
-//  <Route
-//      path="/show-my-friends"
-//      render={() => (
-//          <Friends
-//              id={this.state.id}
-//              firstName={this.state.firstName}
-//              lastName={this.state.lastName}
-//              profilePicUrl={this.state.profilePicUrl}
-//          />
-//      )}
-//  />;
-// make sure to not name the route and axios the same otherwise you will see json

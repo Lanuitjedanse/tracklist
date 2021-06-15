@@ -21,25 +21,16 @@ export default class OtherProfileClass extends Component {
             {
                 friendship: status,
             },
-            () => {
-                // console.log("this.state.friendship: ", this.state.friendship);
-            }
+            () => {}
         );
     }
 
     componentDidMount() {
-        //we want to make an axios request to server to get other user's info
-        // console.log("this.props.match: ", this.props.match.params.id);
-        // take care of situation where user tries to access
-        // his own profile and we have to redirect in that case to '/' route to render his own component
         axios
             .get(`/show-users/${this.props.match.params.id}`)
             .then((response) => {
-                // console.log("response: ", response);
-                // console.log(response.data.playlist);
                 if (this.props.match.params.id == response.data.cookie) {
                     return this.props.history.push("/");
-                    //make sure server sends back loggedin user id
                 }
 
                 this.setState({
@@ -48,7 +39,6 @@ export default class OtherProfileClass extends Component {
                     lastName: response.data.rows.last,
                     profilePicUrl: response.data.rows.profile_pic_url,
                     bio: response.data.rows.bio,
-                    // playlist: response.data.rows.playlist,
                     error: false,
                 });
             })

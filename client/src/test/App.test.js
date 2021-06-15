@@ -15,8 +15,6 @@ axios.get.mockResolvedValue({
 });
 
 test("app stuff", async () => {
-    // const test = render(<App />);
-    // console.log("test: ", test);
     const { container } = render(<App />);
     console.log("container.innerHTML: ", container.innerHTML);
 

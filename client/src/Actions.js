@@ -4,8 +4,6 @@ export async function receiveFriendsWannabes() {
     const { data } = await axios.get(`/friends-wannabes`);
 
     if (data.success) {
-        // console.log("data.rows : ", data.rows);
-
         return {
             type: "SHOW_WANNABES",
             friendsList: data.rows,
@@ -17,7 +15,6 @@ export async function receiveFriendsWannabes() {
 export async function acceptFriend(id) {
     try {
         const { data } = await axios.post("/check-friendship/accept", { id });
-        // console.log("data.rows.id: ", data);
 
         return {
             type: "SHOW_FRIENDS",
@@ -31,7 +28,7 @@ export async function acceptFriend(id) {
 export async function unfriend(id) {
     try {
         const { data } = await axios.post("/check-friendship/end", { id });
-        // console.log("data: ", data);
+
         return {
             type: "END_FRIENDSHIP",
             id: id,
@@ -42,8 +39,6 @@ export async function unfriend(id) {
 }
 
 export function chatMessage(text) {
-    // socket.emit("chatMessage", text);
-
     return {
         type: "SEND_MESSAGE",
         text,

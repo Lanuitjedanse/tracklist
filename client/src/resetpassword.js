@@ -29,8 +29,6 @@ export default class ResetPassword extends React.Component {
         axios
             .post(route[this.state.renderView], this.state)
             .then((response) => {
-                // console.log("respon/se from server: ", response);
-
                 if (!response.data.success) {
                     this.setState({
                         error: true,

@@ -30,13 +30,8 @@ export default function OtherProfile(props) {
         axios
             .get(`/show-users/${props.match.params.id}`)
             .then((response) => {
-                console.log("response: ", response);
-                // console.log(response.data.playlist);
-                // console.log(props.match.params.id == response.data.cookie);
                 if (props.match.params.id == response.data.cookie) {
-                    console.log("self check: ", props);
                     return props.history.push("/");
-                    //make sure server sends back loggedin user id
                 } else {
                     setId(response.data.rows.id);
                     setFirstName(response.data.rows.first);
@@ -67,8 +62,6 @@ export default function OtherProfile(props) {
                         friend.recipient_id == userId ||
                         friend.sender_id == userId
                 );
-
-                console.log("notMe: ", notMe);
 
                 setUserMe(me);
                 setOtherFriends(notMe);

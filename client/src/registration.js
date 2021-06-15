@@ -10,47 +10,29 @@ export default class Registration extends React.Component {
             error: false,
             dbError: false,
         };
-        //strategy #1 for biding
-        // this.handleChange = this.handleChange.bind(this);
     }
 
-    // 1. we need to store the user's input in state
-    // 2. when the user clicks "submit" we need to take the input we got from the user
-    // and send it off to the server in a POST request
-
     handleChange(e) {
-        // console.log("e.target.value", e.target.value);
-        // console.log("e.target.name: ", e.target.name);
         this.setState({
             [e.target.name]: e.target.value,
         });
-        // console.log(this.state);
-        // () => console.log("this.state after setstate: ", this.state);
     }
 
     handleClick() {
-        // 1. send a user's input off to the server in a POST
-        // console.log("I handle the click");
         axios
             .post("/registration", this.state)
             .then((response) => {
-                // console.log("response from server: ", response);
-
                 if (!response.data.success) {
-                    //handle error
                     this.setState({
                         error: true,
                     });
                 } else {
-                    // if everything goes well redirect the user to "/" route
                     location.replace("/");
                 }
             })
             .catch((err) => {
                 console.log("error in axios post registration: ", err);
             });
-        // // how to conditionally render an error message
-        // only run this code if there is an error
     }
 
     render() {

@@ -1,8 +1,6 @@
 import { NavLink } from "react-router-dom";
-// import { ReactComponent as House } from "./client/public/house.svg";
 
 export default function HamburgerMenu({ toggleBurgerMenu }) {
-    // console.log("props.toggleBurgerMenu: ", props.toggleBurgerMenu);
     return (
         <nav>
             <ul className="hamburger-menu">
